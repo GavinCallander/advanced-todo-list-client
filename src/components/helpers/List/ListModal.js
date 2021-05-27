@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function ListCreateForm(props) {
 
     const [formPage, setFormPage] = useState(1);
     const [name, setName] = useState("");
+    const [sections, setSections] = useState([]);
 
     function handleFormClose() {
         props.setModalActive(false);
@@ -21,7 +22,10 @@ export default function ListCreateForm(props) {
                 setFormPage={setFormPage}
                 setName={setName}
             /> : 
-            <PageTwo />
+            <PageTwo 
+                sections={sections}
+                setSections={setSections}
+            />
 
     return (
         <div className={className}>
@@ -60,9 +64,30 @@ function PageOne(props) {
     )
 };
 function PageTwo(props) {
+
+    const [currentSection, setCurrentSection] = useState("");
+
+    let content = props.sections.length ? 
+        props.sections.map(section => {
+        return <li>{section}</li>
+        }) :
+        <p>Womp Womp! No content yet</p>
+
     return(
         <form className="list-form">
-            <p>World</p>
+            <span className="list-form__field">
+                <p className="">Section Name:</p>
+                <input 
+                    className=""
+                    onChange={e => {setCurrentSection(e.target.value)}}
+                />
+                <button className="" onClick={() => {props.setSections(...props.sections, currentSection)}}>
+                    Add
+                </button>
+            </span>
+            <ul className="">
+                {content}
+            </ul>
         </form>
     )
 };
