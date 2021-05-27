@@ -1,6 +1,14 @@
-import { ListDisplay } from '../../helpers';
+import { useEffect, useState } from 'react';
+
+import { ListDisplay, ListModal } from '../../helpers';
 
 export default function Dashboard() {
+
+    const [modalActive, setModalActive] = useState(false);
+
+    useEffect(() => {
+
+    }, []);
 
     let data = [
         {name: 'Something', progress: '70%'},
@@ -9,16 +17,19 @@ export default function Dashboard() {
     ]
 
     let content = data.map(datum => {
-        return <ListDisplay name={datum.name} progress={datum.progress} />
+        return <ListDisplay key={datum.name} name={datum.name} progress={datum.progress} />
     })
 
     return (
         <div className="page">
-            <h1>Content</h1>
-            <h1>More Content</h1>
-            <button>Fuck it! A Button</button>
+            <ListModal 
+                modalActive={modalActive} 
+                setModalActive={setModalActive}
+            />
+            <h2>My Lists</h2>
             {/* probably need some copy above here as well as some form of toolbar */}
             {content}
+            <button onClick={() => setModalActive(true)}>Create a new list</button>
         </div>
     )
 };

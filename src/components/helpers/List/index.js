@@ -1,4 +1,4 @@
 import ListDisplay from './ListDisplay';
-import ListSection from './ListSection';
+import ListModal from './ListModal';
 
-export { ListDisplay, ListSection };
+export { ListDisplay, ListModal };
