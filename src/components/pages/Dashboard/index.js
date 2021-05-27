@@ -1,5 +1,9 @@
+import { ListDisplay } from '../../helpers';
+
 export default function Dashboard() {
     return (
-        <div className=""></div>
+        <div className="page">
+            <ListDisplay text="YOLO" />
+        </div>
     )
 };

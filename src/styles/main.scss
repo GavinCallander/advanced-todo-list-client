@@ -1,12 +1,9 @@
 * {
     box-sizing: border-box;
 }
-.app {
-    width: 100vw;
-    height: 100vh;
-}
 
 // base
+@import './base/container';
 @import './base/typography';
 
 // components

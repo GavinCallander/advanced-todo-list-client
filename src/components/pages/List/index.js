@@ -1,5 +1,7 @@
 export default function List() {
     return (
-        <div className=""></div>
+        <div className="page">
+            Yolo
+        </div>
     )
 };

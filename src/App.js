@@ -10,17 +10,17 @@ import * as ROUTES from './constants/routes';
 
 export default function App() {
     return (
-        <div className="app">
+        <div className="container">
             <Header />
             <Route exact path={ROUTES.HOME} render={() =>
                 <Home />
             } />
-            <Route path={ROUTES.DASHBOARD} render={() => {
-                <Dashboard />
-            }} />
-            <Route path={ROUTES.LIST} render={() => {
+            <Route path={ROUTES.DASHBOARD} render={() => 
+                <Dashboard /> 
+            } />
+            <Route path={ROUTES.LIST} render={() => 
                 <List />
-            }} />
+            } />
         </div>
     )
 };
