@@ -1,7 +1,8 @@
 import { AuthButton } from './Auth';
-import { ListDisplay } from './List';
+import { ListDisplay, ListSection } from './List';
 
 export { 
     AuthButton,
-    ListDisplay
+    ListDisplay,
+    ListSection
 };
