@@ -1,6 +1,11 @@
+import { useState } from 'react'
+
 import { AuthButton } from '../../helpers';
 
 export default function Home() {
+
+    const [modalType, setModalType] = useState("");
+
     return (
         <div className="page">
             <div className="page__section">
@@ -10,10 +15,12 @@ export default function Home() {
             </div>
             <div className="page__section">
                 <AuthButton 
+                    setModalType={setModalType}
                     text="Sign Up"
                 />
                 <p className="">or</p>
                 <AuthButton 
+                    setModalType={setModalType}
                     text="Log In"
                 />
             </div>
