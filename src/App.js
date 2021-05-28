@@ -18,6 +18,7 @@ export default function App() {
         <div className="container">
             <Header />
             <Switch>
+                {/* Maybe separate into separate utils file */}
                 <Route exact path={ROUTES.HOME} render={() =>
                     <Home />
                 } />

@@ -9,8 +9,8 @@ export default function AuthModal(props) {
     const [passwordConfirm, setPasswordConfirm] = useState("");
 
     return (
-        <div className="auth-modal">
-
+        <div className={props.modalClass} id={props.modalId}>
+            I'm a modal!
         </div>
     )
 };
