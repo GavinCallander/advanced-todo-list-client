@@ -6,8 +6,7 @@ export default function AuthWrapper(props) {
     
     function checkAuthentication() {
         let token = localStorage.getItem('authToken');
-        let result = token ? true: false;
-        if (props.user && result) {
+        if (props.isAuthenticated && token) {
             return true
         };
         return false;

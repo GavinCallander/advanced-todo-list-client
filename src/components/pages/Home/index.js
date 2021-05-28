@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import { AuthButton, AuthModal } from '../../helpers';
 
-export default function Home() {
+import { DASHBOARD } from '../../../constants/routes';
+
+export default function Home(props) {
 
     const [modalActive, setModalActive] = useState(false);
     const [modalType, setModalType] = useState("");
@@ -11,11 +14,15 @@ export default function Home() {
 
     let modalId = modalType === "Sign Up" ? "sign-up" : "log-in";
 
+    if (props.currentUser) return <Redirect to={DASHBOARD} />
+
     return (
         <div className="page">
             <AuthModal 
+                handleAuth={props.handleAuth}
                 modalClass={modalClass}
                 modalId={modalId}
+                modalType={modalType}
             />
             <div className="page__section">
                 <p className="">Get organized alone</p>
@@ -24,12 +31,14 @@ export default function Home() {
             </div>
             <div className="page__section">
                 <AuthButton
+                    modalActive={modalActive}
                     setModalActive={setModalActive}
                     setModalType={setModalType}
                     text="Sign Up"
                 />
                 <p className="">or</p>
                 <AuthButton 
+                    modalActive={modalActive}
                     setModalActive={setModalActive}
                     setModalType={setModalType}
                     text="Log In"

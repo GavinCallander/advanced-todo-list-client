@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { Dashboard, Home, List } from './components/pages';
@@ -12,7 +12,19 @@ import * as ROUTES from './constants/routes';
 export default function App() {
 
     const [user, setUser] = useState(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+    const handleAuth = user => {
+        if (user) {
+            setUser(user);
+            setIsAuthenticated(true);
+        }
+        else {
+            setUser(null);
+            setIsAuthenticated(null);
+            localStorage.removeItem("authToken");
+        };
+    };
 
     return (
         <div className="container">
@@ -20,12 +32,15 @@ export default function App() {
             <Switch>
                 {/* Maybe separate into separate utils file */}
                 <Route exact path={ROUTES.HOME} render={() =>
-                    <Home />
+                    <Home 
+                        handleAuth={handleAuth}
+                        user={user}
+                    />
                 } />
                 {/* Auth wrapper checks for authentication by looking for token in local storage */}
                 {/* Will be checking against current user as well at App.js */}
                 {/* THIS IS A BIG TODO */}
-                <AuthWrapper user={user} >
+                <AuthWrapper isAuthenticated={isAuthenticated}>
                     <Route path={ROUTES.DASHBOARD} render={() => 
                         <Dashboard /> 
                     } />

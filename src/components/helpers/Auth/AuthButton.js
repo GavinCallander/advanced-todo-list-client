@@ -1,9 +1,12 @@
 export default function AuthButton(props) {
 
     function openModal() {
-        props.setModalActive(true);
-        props.setModalType(props.text);
-    }
+        if (!props.modalActive) {
+            props.setModalActive(true);
+            props.setModalType(props.text);
+        }
+        return;
+    };
 
     return (
         <div className="auth-btn" onClick={openModal}>
