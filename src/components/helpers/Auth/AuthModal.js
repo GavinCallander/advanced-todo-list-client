@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
-import { setAuthToken } from '../../../utils/setAuthToken';
+import { setAuthToken } from '../../../modules/setAuthToken';
 
 import { LogInForm, SignUpForm } from './AuthForms';
 
