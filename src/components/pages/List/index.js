@@ -1,18 +1,28 @@
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function List({ match }) {
 
-    const [listId, setListId] = useState(null);
+    const [listId, setListId] = useState(match.params.id);
 
     useEffect(() => {
-        setListId(match.params.id)
+        fetchListData();
     }, []);
 
-    console.log(listId);
+    const fetchListData = () => {
+        console.log(listId);
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/list/${listId}`)
+        .then(response => {
+            console.log(response);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    };
 
     return (
         <div className="page">
-            
+            Hello {listId}
         </div>
     )
 };
