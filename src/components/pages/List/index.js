@@ -1,7 +1,18 @@
-export default function List() {
+import { useEffect, useState } from 'react';
+
+export default function List({ match }) {
+
+    const [listId, setListId] = useState(null);
+
+    useEffect(() => {
+        setListId(match.params.id)
+    }, []);
+
+    console.log(listId);
+
     return (
         <div className="page">
-
+            
         </div>
     )
 };
@@ -14,4 +25,3 @@ export default function List() {
     // Labels (with a what is this drop down for those who don't understand)
     // ListItems
 // The above will be created from the dashboard page
-

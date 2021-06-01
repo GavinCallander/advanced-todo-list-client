@@ -32,7 +32,7 @@ export default function AuthModal(props) {
             setErrorMessage("Passwords do not match. Please reenter before resubmitting.")
         }
         else {
-            axios.post(`${process.env.REACT_APP_SERVER_URL}/${route}`, {data})
+            axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/${route}`, {data})
             .then(response => {
                 localStorage.setItem('authToken', response.data.token);
                 setAuthToken(response.data.token);

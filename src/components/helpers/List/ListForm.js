@@ -1,16 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
-
-import { LIST } from '../../../constants/routes';
 
 export default function ListForm(props) {
 
     const [currentSection, setCurrentSection] = useState("");
     const [currentField, setCurrentField] = useState("");
     const [itemFields, setItemFields] = useState([]);
-    const [formPage, setFormPage] = useState(1);
+    // const [formPage, setFormPage] = useState(1);
     const [name, setName] = useState("");
-    const [owner, setOwner] = useState(0);
+    const [owner, setOwner] = useState(props.user._id);
     const [sections, setSections] = useState([]);
 
     const addField = () => {
@@ -30,7 +28,7 @@ export default function ListForm(props) {
         };
         let data = { itemFields, name, owner, sections }
         e.preventDefault();
-        axios.post(`${process.env.REACT_APP_SERVER_URL}/new`, { data })
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/list/new`, { data })
         .then(response => {
             console.log(response);
             props.setRoute(response.data.createdList._id)
@@ -40,10 +38,6 @@ export default function ListForm(props) {
             console.log(err);
         });
     };
-
-    useEffect(() => {
-        setOwner(props.user._id);
-    }, []);
 
     return (
         <form className="list-form" onSubmit={e => handleNewListSubmit(e)}>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import { ListDisplay, ListModal } from '../../helpers';
@@ -10,10 +10,6 @@ export default function Dashboard(props) {
     const [modalActive, setModalActive] = useState(false);
     const [redirect, setRedirect] = useState(false);
     const [route, setRoute] = useState("");
-
-    useEffect(() => {
-        console.log(`${LIST}/${route}`);
-    }, []);
 
     let data = [
         {name: 'Something', progress: '70%'},

@@ -41,13 +41,19 @@ export default function App() {
                 {/* Will be checking against current user as well at App.js */}
                 {/* THIS IS A BIG TODO */}
                 <AuthWrapper isAuthenticated={isAuthenticated}>
-                    <Route path={ROUTES.DASHBOARD} render={() => 
+                    <Route 
+                        path={ROUTES.DASHBOARD} 
+                        render={() => 
                         <Dashboard 
                             user={user}
-                        /> 
+                        />
                     } />
-                    <Route path={ROUTES.LIST} render={() => 
-                        <List />
+                    <Route 
+                        path={`${ROUTES.LIST}/:id`} 
+                        render={({ match}) => 
+                        <List 
+                            match={match}
+                        />
                     } />
                 </AuthWrapper>
             </Switch>
