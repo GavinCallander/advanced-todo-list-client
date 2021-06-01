@@ -1,10 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import { ListDisplay, ListModal } from '../../helpers';
+
+import { LIST } from '../../../constants/routes';
 
 export default function Dashboard(props) {
 
     const [modalActive, setModalActive] = useState(false);
+    const [redirect, setRedirect] = useState(false);
+    const [route, setRoute] = useState("");
+
+    useEffect(() => {
+        console.log(`${LIST}/${route}`);
+    }, []);
 
     let data = [
         {name: 'Something', progress: '70%'},
@@ -16,11 +25,15 @@ export default function Dashboard(props) {
         return <ListDisplay key={datum.name} name={datum.name} progress={datum.progress} />
     })
 
+    if (redirect) return <Redirect to={`${LIST}/${route}`} />
+
     return (
         <div className="page">
             <ListModal 
-                modalActive={modalActive} 
+                modalActive={modalActive}
                 setModalActive={setModalActive}
+                setRedirect={setRedirect}
+                setRoute={setRoute}
                 user={props.user}
             />
             <h2>My Lists</h2>

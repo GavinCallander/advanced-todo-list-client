@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import { LIST } from '../../../constants/routes';
@@ -8,31 +7,34 @@ export default function ListForm(props) {
 
     const [currentSection, setCurrentSection] = useState("");
     const [currentField, setCurrentField] = useState("");
-    const [fields, setFields] = useState([]);
+    const [itemFields, setItemFields] = useState([]);
     const [formPage, setFormPage] = useState(1);
-    const [listId, setListId] = useState(null);
     const [name, setName] = useState("");
-    const [ownerId, setOwnerId] = useState(0);
-    const [redirect, setRedirect] = useState(false);
+    const [owner, setOwner] = useState(0);
     const [sections, setSections] = useState([]);
 
     const addField = () => {
-        setFields([...fields, currentField]);
+        let fieldObj = { name: currentField, value: "" }
+        setItemFields([...itemFields, fieldObj]);
         setCurrentField("");
     };
     const addSection = () => {
-        setSections([...sections, currentSection]);
+        let sectionObj = {name: currentSection, listItems: []}
+        setSections([...sections, sectionObj]);
         setCurrentSection("");
     };
 
     const handleNewListSubmit = e => {
-        let data = { fields, name, ownerId, sections }
+        if (!sections) {
+            setSections([...sections, "Section"])
+        };
+        let data = { itemFields, name, owner, sections }
         e.preventDefault();
         axios.post(`${process.env.REACT_APP_SERVER_URL}/new`, { data })
         .then(response => {
             console.log(response);
-            setListId(response.data._id)
-            setRedirect(true);
+            props.setRoute(response.data.createdList._id)
+            props.setRedirect(true);
         })
         .catch(err => {
             console.log(err);
@@ -40,10 +42,8 @@ export default function ListForm(props) {
     };
 
     useEffect(() => {
-        setOwnerId(props.user._id);
+        setOwner(props.user._id);
     }, []);
-
-    if (redirect) return <Redirect to={`${LIST}/${listId}`} />
 
     return (
         <form className="list-form" onSubmit={e => handleNewListSubmit(e)}>

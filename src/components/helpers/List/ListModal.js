@@ -24,7 +24,11 @@ export default function ListModal(props) {
                 {/* ToDo: Add header title and align with form */}
                 <p className="" onClick={handleModalClose}>X</p>
             </span>
-            <ListForm user={props.user} />
+            <ListForm 
+                setRedirect={props.setRedirect}
+                setRoute={props.setRoute}
+                user={props.user} 
+            />
             {/* <ModalNav
                 handleNewListSubmit={handleNewListSubmit}
                 formPage={formPage}
