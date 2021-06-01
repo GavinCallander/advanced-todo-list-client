@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 export default function ListForm(props) {
@@ -38,9 +38,9 @@ export default function ListForm(props) {
         });
     };
 
-    useEffect(() => {
-        setOwner(props.user._id)
-    })
+    // useEffect(() => {
+    //     setOwner(props.user._id)
+    // })
 
     return (
         <form className="list-form" onSubmit={e => handleNewListSubmit(e)}>
