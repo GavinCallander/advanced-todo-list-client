@@ -34,17 +34,13 @@ export default function AuthModal(props) {
         else {
             axios.post(`${process.env.REACT_APP_SERVER_URL}/${route}`, {data})
             .then(response => {
-                console.log(response);
                 localStorage.setItem('authToken', response.data.token);
-                console.log('Set storage good')
                 setAuthToken(response.data.token);
-                console.log('Set Auth good')
                 props.handleAuth(response.data.user);
-                console.log('Handle auth isnt fucked')
                 setRedirect(true);
             })
             .catch(err => {
-                console.log(err);
+                setErrorMessage("Seems we ran into a problem :/ try again!");
             });
         }
     };

@@ -1,31 +1,47 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export default function ListCreateForm(props) {
+import NewListForm from './NewListForm';
+
+export default function ListModal(props) {
 
     const [formPage, setFormPage] = useState(1);
     const [name, setName] = useState("");
+    const [ownerId, setOwnerId] = useState(null);
     const [sections, setSections] = useState([]);
 
     function handleFormClose() {
         props.setModalActive(false);
         setFormPage(1);
     };
-
+    
     let className = props.modalActive ? "list-modal list-modal--active" : "list-modal";
     let content;
 
-    content = 
-        formPage === 1 ? 
-            <PageOne 
-                formPage={formPage}
-                handleFormClose={handleFormClose}
-                setFormPage={setFormPage}
-                setName={setName}
-            /> : 
-            <PageTwo 
-                sections={sections}
-                setSections={setSections}
-            />
+    /*
+        ToDo: 
+            Finalize form user flow:
+                *   On modal opening, the current userId is stored in state
+                *   Next field to appear is Name; user should input and then hit next
+                *   Next are sections; each will display once created, with the option to delete; next
+                *   Next are fields for the list items; they will work the same as sections; next
+                *   Next is a summary of inputs for confirmation; redirects to specific list page
+    */
+
+    // content = 
+    //     formPage === 1 ? 
+    //         <PageOne 
+    //             formPage={formPage}
+    //             handleFormClose={handleFormClose}
+    //             setFormPage={setFormPage}
+    //             setName={setName}
+    //         /> : 
+    //         formPage === 2 ?
+    //         <PageTwo 
+    //             sections={sections}
+    //             setSections={setSections}
+    //         /> :
+    //         <PageThree />
+
 
     return (
         <div className={className}>
@@ -33,7 +49,10 @@ export default function ListCreateForm(props) {
                 {/* ToDo: Add header title and align with form */}
                 <p className="" onClick={handleFormClose}>X</p>
             </span>
-            {content}
+            {/* {content} */}
+            <NewListForm 
+                user={props.user}
+            />
         </div>
     )
 };
@@ -91,3 +110,9 @@ function PageTwo(props) {
         </form>
     )
 };
+
+function PageThree() {
+    return (
+        <div></div>
+    )
+}

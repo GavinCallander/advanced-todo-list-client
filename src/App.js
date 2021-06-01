@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { Dashboard, Home, List } from './components/pages';
@@ -42,7 +42,9 @@ export default function App() {
                 {/* THIS IS A BIG TODO */}
                 <AuthWrapper isAuthenticated={isAuthenticated}>
                     <Route path={ROUTES.DASHBOARD} render={() => 
-                        <Dashboard /> 
+                        <Dashboard 
+                            user={user}
+                        /> 
                     } />
                     <Route path={ROUTES.LIST} render={() => 
                         <List />
