@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+import ListForm from './ListForm';
+
 export default function ListModal(props) {
 
     const [fields, setFields] = useState([]);
@@ -17,8 +19,8 @@ export default function ListModal(props) {
     let content;
 
     const handleNewListSubmit = e => {
+        let data = { name: name }
         e.preventDefault();
-        let data = "Hello World"
         axios.post(`${process.env.REACT_APP_SERVER_URL}/new`, { data })
         .then(response => {
             console.log(response);
@@ -38,23 +40,23 @@ export default function ListModal(props) {
                 *   Next is a summary of inputs for confirmation; redirects to specific list page
     */
 
-    content = 
-        formPage === 1 ? 
-            <PageOne 
-                formPage={formPage}
-                handleFormClose={handleModalClose}
-                setFormPage={setFormPage}
-                setName={setName}
-            /> : 
-            formPage === 2 ?
-            <PageTwo 
-                sections={sections}
-                setSections={setSections}
-            /> :
-            <PageThree 
-                fields={fields}
-                setFields={setFields}
-            />
+    // content = 
+    //     formPage === 1 ? 
+    //         <PageOne 
+    //             formPage={formPage}
+    //             handleFormClose={handleModalClose}
+    //             setFormPage={setFormPage}
+    //             setName={setName}
+    //         /> : 
+    //         formPage === 2 ?
+    //         <PageTwo 
+    //             sections={sections}
+    //             setSections={setSections}
+    //         /> :
+    //         <PageThree 
+    //             fields={fields}
+    //             setFields={setFields}
+    //         />
 
 
     return (
@@ -63,15 +65,16 @@ export default function ListModal(props) {
                 {/* ToDo: Add header title and align with form */}
                 <p className="" onClick={handleModalClose}>X</p>
             </span>
-            {content}
-            {/* <NewListForm 
-                user={props.user}
-            /> */}
-            <ModalNav
+            <ListForm 
+                setName={setName}
+                handleNewListSubmit={handleNewListSubmit}
+            />
+            {/* {content} */}
+            {/* <ModalNav
                 handleNewListSubmit={handleNewListSubmit}
                 formPage={formPage}
                 setFormPage={setFormPage}
-            />
+            /> */}
         </div>
     )
 };
@@ -79,107 +82,27 @@ export default function ListModal(props) {
 // think about possible first time user tutorial; keep hints in for after but maybe a more conversational
 // approach would be beneficial for first time users?
 
+// function ModalNav(props) {
 
-// Should be changed into reuseable component that takes input as props?
-
-function PageOne(props) {
-    return (
-        <form className="list-form">
-            <span className="list-form__field">
-                <p className="">Name:</p>
-                <input 
-                    className="" 
-                    onChange={(e) => props.setName(e.target.value)}
-                    placeholder="Groceries, Chores etc." 
-                    type="text" 
-                />
-            </span>
-            <span className="list-form__field">
-                <button className="" onClick={props.handleFormClose}>Cancel</button>
-                <button className="" onClick={() => props.setFormPage(props.formPage + 1)}>Next</button>
-            </span>
-        </form>
-    )
-};
-function PageTwo(props) {
-
-    const [currentSection, setCurrentSection] = useState("");
-
-    let sections = props.sections.length ? 
-        props.sections.map(section => {
-        return <li>{section}</li>
-        }) :
-        <p>Womp Womp! No content yet</p>
-
-    return(
-        <form className="list-form">
-            <span className="list-form__field">
-                <p className="">Section Name:</p>
-                <input 
-                    className=""
-                    onChange={e => {setCurrentSection(e.target.value)}}
-                />
-                <button className="" onClick={() => {props.setSections(...props.sections, currentSection)}}>
-                    Add
-                </button>
-            </span>
-            <ul className="">
-                {sections}
-            </ul>
-        </form>
-    )
-};
-function PageThree(props) {
-
-    const [currentField, setCurrentField] = useState("");
-
-    let fields = props.fields.length ?
-        props.fields.map(field => {
-            return <li>{field}</li>
-        }) :
-        <p>Womp Womp!</p>
-
-
-    return (
-        <form className="list-form">
-            <span className="list-form__field">
-                <p className="">Field Name:</p>
-                <input
-                    className=""
-                    onChange={e => {setCurrentField(e.target.value)}}
-                />
-                <button className="" onClick={() => props.setFields(...props.fields, currentField)}>
-                    Add
-                </button>
-            </span>
-            <ul className="">
-                {fields}
-            </ul>
-        </form>
-    )
-};
-
-function ModalNav(props) {
-
-    let button = 
-        props.formPage === 3 ?
-        <input
-            className=""
-            type="submit"
-            value="Submit"
-        /> :
-        <button 
-            className=""
-            onClick={() => props.setFormPage(props.formPage + 1)}
-        >
-            Next
-        </button>
+//     let button = 
+//         props.formPage === 3 ?
+//         <input
+//             className=""
+//             type="submit"
+//             value="Submit"
+//         /> :
+//         <button 
+//             className=""
+//             onClick={() => props.setFormPage(props.formPage + 1)}
+//         >
+//             Next
+//         </button>
     
-    return (
-        <span className="">
-            <button className="" onClick={() => props.setFormPage(props.formPage - 1)}>Prev</button>
-            <button className="">Cancel</button>
-            {button}
-        </span>
-    )
-};
+//     return (
+//         <span className="">
+//             <button className="" onClick={() => props.setFormPage(props.formPage - 1)}>Prev</button>
+//             <button className="">Cancel</button>
+//             {button}
+//         </span>
+//     )
+// };
