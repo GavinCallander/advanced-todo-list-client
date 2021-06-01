@@ -12,6 +12,7 @@ export function LogInForm(props) {
             <span className="auth-form__field--submit">
                 <input className="" type="submit" value="Log In" />
             </span> 
+            <p className="">{props.errorMessage}</p>
         </form>
     );
 };
@@ -42,6 +43,7 @@ export function SignUpForm(props) {
             <span className="auth-form__field--submit">
                 <input className="" type="submit" value="Sign Up" />
             </span>
+            <p className="">{props.errorMessage}</p>
         </form>
     );
 };
