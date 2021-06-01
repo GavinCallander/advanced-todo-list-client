@@ -1,34 +1,12 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-
 import ListForm from './ListForm';
 
 export default function ListModal(props) {
-
-    const [fields, setFields] = useState([]);
-    const [formPage, setFormPage] = useState(1);
-    const [name, setName] = useState("");
-    const [ownerId, setOwnerId] = useState(props.user._id);
-    const [sections, setSections] = useState([]);
 
     function handleModalClose() {
         props.setModalActive(false);
     };
     
     let className = props.modalActive ? "list-modal list-modal--active" : "list-modal";
-    let content;
-
-    const handleNewListSubmit = e => {
-        let data = { name: name }
-        e.preventDefault();
-        axios.post(`${process.env.REACT_APP_SERVER_URL}/new`, { data })
-        .then(response => {
-            console.log(response);
-        })
-        .catch(err => {
-            console.log(err);
-        });
-    };
 
     /*
         ToDo: 
@@ -40,36 +18,13 @@ export default function ListModal(props) {
                 *   Next is a summary of inputs for confirmation; redirects to specific list page
     */
 
-    // content = 
-    //     formPage === 1 ? 
-    //         <PageOne 
-    //             formPage={formPage}
-    //             handleFormClose={handleModalClose}
-    //             setFormPage={setFormPage}
-    //             setName={setName}
-    //         /> : 
-    //         formPage === 2 ?
-    //         <PageTwo 
-    //             sections={sections}
-    //             setSections={setSections}
-    //         /> :
-    //         <PageThree 
-    //             fields={fields}
-    //             setFields={setFields}
-    //         />
-
-
     return (
         <div className={className}>
             <span className="list-modal__header">
                 {/* ToDo: Add header title and align with form */}
                 <p className="" onClick={handleModalClose}>X</p>
             </span>
-            <ListForm 
-                setName={setName}
-                handleNewListSubmit={handleNewListSubmit}
-            />
-            {/* {content} */}
+            <ListForm user={props.user} />
             {/* <ModalNav
                 handleNewListSubmit={handleNewListSubmit}
                 formPage={formPage}
