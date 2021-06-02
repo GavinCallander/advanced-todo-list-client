@@ -8,7 +8,16 @@ export default function List({ match }) {
         setListId(match.params.id)
     }, []);
 
-    console.log(listId);
+    const fetchListData = () => {
+        console.log(listId);
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/lists/${listId}`)
+        .then(response => {
+            console.log(response);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    };
 
     return (
         <div className="page">

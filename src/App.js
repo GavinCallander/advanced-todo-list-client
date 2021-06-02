@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 
 import { Dashboard, Home, List } from './components/pages';
 import { Header } from './components/layout';
@@ -10,21 +11,38 @@ import './styles/main.scss';
 import * as ROUTES from './constants/routes';
 
 export default function App() {
-
+    
     const [user, setUser] = useState(null);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+    
     const handleAuth = user => {
         if (user) {
             setUser(user);
-            setIsAuthenticated(true);
         }
         else {
             setUser(null);
-            setIsAuthenticated(null);
             localStorage.removeItem("authToken");
         };
     };
+    
+    useEffect(() => {
+        const decodeToken = currentToken => {
+            let token = currentToken || localStorage.getItem('authToken');
+            if (token) {
+                let decoded = jwtDecode(token);
+                if (!decoded || Date.now() >= decoded.exp * 1000) {
+                    setUser(null);
+                }
+                else {
+                    setUser(decoded);
+                    handleAuth(decoded);
+                };
+            }
+            else {
+                setUser(null);
+            };
+        };
+        decodeToken();
+    }, []);
 
     return (
         <div className="app">
@@ -40,7 +58,7 @@ export default function App() {
                 {/* Auth wrapper checks for authentication by looking for token in local storage */}
                 {/* Will be checking against current user as well at App.js */}
                 {/* THIS IS A BIG TODO */}
-                <AuthWrapper isAuthenticated={isAuthenticated}>
+                <AuthWrapper user={user}>
                     <Route 
                         path={ROUTES.DASHBOARD} 
                         render={() => 
