@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default function List({ match }) {
@@ -22,7 +23,7 @@ export default function List({ match }) {
 
     return (
         <div className="page">
-            
+            <Link to="/dashboard">Dashboard</Link>
         </div>
     )
 };

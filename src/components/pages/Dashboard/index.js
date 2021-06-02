@@ -13,6 +13,8 @@ export default function Dashboard(props) {
     const [redirect, setRedirect] = useState(false);
     const [route, setRoute] = useState("");
 
+    console.log("Outside the effect hook (dashboard)");
+
     const fetchLists = () => {
         axios.get(`${process.env.REACT_APP_SERVER_URL}/lists`)
         .then(response => {
@@ -24,6 +26,7 @@ export default function Dashboard(props) {
     };
 
     useEffect(() => {
+        console.log("Inside the effect hook (dashboard)")
         fetchLists();
     }, []);
 
