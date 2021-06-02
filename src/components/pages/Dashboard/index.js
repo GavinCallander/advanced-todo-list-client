@@ -8,21 +8,15 @@ import { LIST } from '../../../constants/routes';
 
 export default function Dashboard(props) {
 
-    // const [lists, setLists] = useState([]);
+    const [lists, setLists] = useState([]);
     const [modalActive, setModalActive] = useState(false);
     const [redirect, setRedirect] = useState(false);
     const [route, setRoute] = useState("");
 
-    let data = [
-        {name: 'Something', progress: '70%'},
-        {name: 'You', progress: '0%'},
-        {name: 'Me', progress: '100%'}  
-    ]
-
     const fetchLists = () => {
         axios.get(`${process.env.REACT_APP_SERVER_URL}/lists`)
         .then(response => {
-            console.log(response);
+            setLists(response.data.user.lists);
         })
         .catch(err => {
             console.log(err);
@@ -30,14 +24,16 @@ export default function Dashboard(props) {
     };
 
     useEffect(() => {
-        // fetchLists();
+        fetchLists();
     }, []);
 
-    let lists = data.map(datum => {
-        return <ListDisplay key={datum.name} name={datum.name} progress={datum.progress} />
-    })
+    let listsDisplay = lists.map(list => {
+        return <ListDisplay key={list._id} name={list.name} progress="100%" />
+    });
 
-    if (redirect) return <Redirect to={`${LIST}/${route}`} />
+    if (redirect) {
+        return <Redirect to={`${LIST}/${route}`} />
+    }
 
     return (
         <div className="page">
@@ -49,8 +45,8 @@ export default function Dashboard(props) {
                 user={props.user}
             />
             <h2>My Lists</h2>
+            {listsDisplay}
             {/* probably need some copy above here as well as some form of toolbar */}
-            {lists}
             <button onClick={() => setModalActive(true)}>Create a new list</button>
         </div>
     )
