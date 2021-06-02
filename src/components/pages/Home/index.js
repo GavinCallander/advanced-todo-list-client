@@ -9,8 +9,6 @@ export default function Home(props) {
 
     const [modalActive, setModalActive] = useState(false);
     const [modalType, setModalType] = useState("");
-    
-    console.log("Home page calling")
 
     let modalClass = modalActive ? "auth-modal auth-modal--active" : "auth-modal";
 

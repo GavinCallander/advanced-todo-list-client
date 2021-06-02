@@ -1,9 +1,15 @@
+import { Link } from 'react-router-dom';
+
+import { LIST } from '../../../constants/routes';
+
 export default function ListDisplay(props) {
 
+    const { id, name, progress } = props;
+
     return (
-        <div className="list-display">
-            <p className="">{props.name}</p>
-            <p className="">{props.progress}</p>
-        </div>
+        <Link className="list-display" to={`${LIST}/${id}`}>
+            <p className="">{name}</p>
+            <p className="">{progress}</p>
+        </Link>
     )
 };
