@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 export default function ListForm(props) {
@@ -23,24 +23,29 @@ export default function ListForm(props) {
     };
 
     const handleNewListSubmit = e => {
+        console.log('submitting')
         if (!sections) {
             setSections([...sections, "Section"])
         };
+        console.log('sections are all good! Gonna hit the route')
         let data = { itemFields, name, owner, sections }
         e.preventDefault();
-        axios.post(`${process.env.REACT_APP_SERVER_URL}/list/new`, { data })
+        console.log(`${process.env.REACT_APP_SERVER_URL}/lists/new`);
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/lists/new`, { data })
         .then(response => {
+            console.log('inside the then')
             props.setRoute(response.data.createdList._id)
             props.setRedirect(true);
         })
         .catch(err => {
+            console.log("caught a big one")
             console.log(err);
         });
     };
 
-    useEffect(() => {
-        setOwner(props.user._id)
-    })
+    // useEffect(() => {
+    //     setOwner(props.user._id)
+    // })
 
     return (
         <form className="list-form" onSubmit={e => handleNewListSubmit(e)}>
