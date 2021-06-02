@@ -23,23 +23,18 @@ export default function ListForm(props) {
     };
 
     const handleNewListSubmit = e => {
-        console.log('submitting')
         if (!sections) {
             setSections([...sections, "Section"])
         };
-        console.log('sections are all good! Gonna hit the route')
         let data = { itemFields, name, owner, sections }
         e.preventDefault();
         axios.post(`${process.env.REACT_APP_SERVER_URL}/lists`, { data })
         .then(response => {
-            console.log('inside the then')
-            console.log(response);
             console.log(response);
             props.setRoute(response.data.createdList._id)
             props.setRedirect(true);
         })
         .catch(err => {
-            console.log("caught a big one")
             console.log(err);
         });
     };

@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 import { ListDisplay, ListModal } from '../../helpers';
 
@@ -7,6 +8,7 @@ import { LIST } from '../../../constants/routes';
 
 export default function Dashboard(props) {
 
+    // const [lists, setLists] = useState([]);
     const [modalActive, setModalActive] = useState(false);
     const [redirect, setRedirect] = useState(false);
     const [route, setRoute] = useState("");
@@ -16,6 +18,20 @@ export default function Dashboard(props) {
         {name: 'You', progress: '0%'},
         {name: 'Me', progress: '100%'}  
     ]
+
+    const fetchLists = () => {
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/lists`)
+        .then(response => {
+            console.log(response);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    };
+
+    useEffect(() => {
+        // fetchLists();
+    }, []);
 
     let lists = data.map(datum => {
         return <ListDisplay key={datum.name} name={datum.name} progress={datum.progress} />
