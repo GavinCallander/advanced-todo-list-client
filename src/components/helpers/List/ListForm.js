@@ -28,7 +28,7 @@ export default function ListForm(props) {
         };
         let data = { itemFields, name, owner, sections }
         e.preventDefault();
-        axios.post(`${process.env.REACT_APP_SERVER_URL}/list/new`, { data })
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/lists`, { data })
         .then(response => {
             console.log(response);
             props.setRoute(response.data.createdList._id)

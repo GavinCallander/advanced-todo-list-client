@@ -27,7 +27,7 @@ export default function App() {
     };
 
     return (
-        <div className="container">
+        <div className="app">
             <Header />
             <Switch>
                 {/* Maybe separate into separate utils file */}
