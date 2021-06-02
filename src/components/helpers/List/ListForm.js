@@ -33,11 +33,9 @@ export default function ListForm(props) {
         console.log(`${process.env.REACT_APP_SERVER_URL}/lists/new`);
         axios.post(`${process.env.REACT_APP_SERVER_URL}/lists/new`, { data })
         .then(response => {
-<<<<<<< HEAD
             console.log('inside the then')
-=======
             console.log(response);
->>>>>>> parent of ebc0931 (list now passes back data)
+            console.log(response);
             props.setRoute(response.data.createdList._id)
             props.setRedirect(true);
         })
@@ -47,13 +45,9 @@ export default function ListForm(props) {
         });
     };
 
-<<<<<<< HEAD
     // useEffect(() => {
     //     setOwner(props.user._id)
     // })
-
-=======
->>>>>>> parent of ebc0931 (list now passes back data)
     return (
         <form className="list-form" onSubmit={e => handleNewListSubmit(e)}>
             <span className="list-form__field">

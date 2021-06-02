@@ -8,7 +8,6 @@ export default function List({ match }) {
         setListId(match.params.id)
     }, []);
 
-<<<<<<< HEAD
     const fetchListData = () => {
         console.log(listId);
         axios.get(`${process.env.REACT_APP_SERVER_URL}/lists/${listId}`)
@@ -19,9 +18,6 @@ export default function List({ match }) {
             console.log(err);
         });
     };
-=======
-    console.log(listId);
->>>>>>> parent of ebc0931 (list now passes back data)
 
     return (
         <div className="page">
