@@ -6,6 +6,8 @@ import { Dashboard, Home, List } from './components/pages';
 import { Header } from './components/layout';
 import { AuthWrapper } from './components/helpers';
 
+import { setAuthToken } from './modules/setAuthToken';
+
 import './styles/main.scss';
 
 import * as ROUTES from './constants/routes';
@@ -33,6 +35,7 @@ export default function App() {
                     setUser(null);
                 }
                 else {
+                    setAuthToken(token);
                     setUser(decoded);
                     handleAuth(decoded);
                 };
@@ -46,7 +49,7 @@ export default function App() {
 
     return (
         <div className="app">
-            <Header />
+            <Header user={user} />
             <Switch>
                 {/* Maybe separate into separate utils file */}
                 <Route exact path={ROUTES.HOME} render={() =>

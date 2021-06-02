@@ -1,12 +1,9 @@
 import { useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import { setAuthToken } from '../../../modules/setAuthToken';
 
 import { LogInForm, SignUpForm } from './AuthForms';
-
-import { DASHBOARD } from '../../../constants/routes';
 
 export default function AuthModal(props) {
 
@@ -16,7 +13,6 @@ export default function AuthModal(props) {
     const [last_name, setLast_name] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
-    const [redirect, setRedirect] = useState(false);
 
     let route = props.modalType === "Sign Up" ? "signup" : "login";
 
@@ -37,15 +33,12 @@ export default function AuthModal(props) {
                 localStorage.setItem('authToken', response.data.token);
                 setAuthToken(response.data.token);
                 props.handleAuth(response.data.user);
-                setRedirect(true);
             })
             .catch(err => {
                 setErrorMessage("Seems we ran into a problem :/ try again!");
             });
         }
     };
-
-    if (redirect) return <Redirect to={DASHBOARD} />;
 
     let form = props.modalType === "Sign Up" ?
         <SignUpForm 

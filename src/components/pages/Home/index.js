@@ -14,7 +14,7 @@ export default function Home(props) {
 
     let modalId = modalType === "Sign Up" ? "sign-up" : "log-in";
 
-    if (props.currentUser) return <Redirect to={DASHBOARD} />
+    if (props.user) return <Redirect to={DASHBOARD} />
 
     return (
         <div className="page">
@@ -25,9 +25,8 @@ export default function Home(props) {
                 modalType={modalType}
             />
             <div className="page__section">
-                <p className="">Get organized alone</p>
-                <p className="">Get organized together</p>
-                <p className="">Make life easy</p>
+                <p className="">Don't get twisted</p>
+                <p className="">Get on Listed</p>
             </div>
             <div className="page__section">
                 <AuthButton
