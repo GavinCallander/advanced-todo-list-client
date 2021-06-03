@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function ListForm(props) {
@@ -22,8 +22,14 @@ export default function ListForm(props) {
         setCurrentSection("");
     };
 
+    /*
+        ToDo: 
+            *   Need to make sure sections passes forward a default value if no sections
+            *   Should probably do on the back end
+
+    */
     const handleNewListSubmit = e => {
-        if (!sections) {
+        if (!sections.length) {
             setSections([...sections, "Section"])
         };
         let data = { itemFields, name, owner, sections }
@@ -39,9 +45,6 @@ export default function ListForm(props) {
         });
     };
 
-    // useEffect(() => {
-    //     setOwner(props.user._id)
-    // })
     return (
         <form className="list-form" onSubmit={e => handleNewListSubmit(e)}>
             <span className="list-form__field">

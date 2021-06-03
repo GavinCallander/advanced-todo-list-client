@@ -5,7 +5,7 @@ export default function Header(props) {
 
     let menu = props.user ?
         <span className="header__section">
-            <FontAwesomeIcon icon={faBars} size="2x" />
+            <FontAwesomeIcon icon={faBars} size="1x" />
         </span>:
         null
 
