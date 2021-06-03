@@ -41,7 +41,7 @@ export default function ListPage({ match }) {
                     return <ListItem name={listItem} />
                 }):
                 items = <ListItem name="Thing" />
-                return<ListSection key={section._id} setModalOpen={setModalOpen} setSectionId={setSectionId} sectionId={section._id} name={section.name}></ListSection>
+                return<ListSection key={section._id} setModalOpen={setModalOpen} sectionId={section._id} setSectionId={setSectionId} name={section.name}></ListSection>
                 }):
                 null;
 

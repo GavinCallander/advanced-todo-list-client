@@ -11,7 +11,7 @@ export default function ListItemModal(props) {
             {
                 listId: props.listId,
                 name,
-                section: props.sectionId
+                sectionId: props.sectionId
             }
         )
     };
