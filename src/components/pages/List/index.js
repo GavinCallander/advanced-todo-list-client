@@ -36,7 +36,7 @@ export default function ListPage({ match }) {
     let items;
     let sectionsDisplay = listData && sections ?
         sections.map(section => {
-            section.listItems.length ? 
+            section.length ? 
                 items = sections.listItems.map(listItem => {
                     return <ListItem name={listItem} />
                 }):

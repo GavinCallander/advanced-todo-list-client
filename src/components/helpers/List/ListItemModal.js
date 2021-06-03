@@ -7,19 +7,13 @@ export default function ListItemModal(props) {
 
     const submitNewListItem = e => {
         e.preventDefault();
-        axios.put(`${process.env.REACT_APP_SERVER_URL}/lists/item`, 
-            { 
+        axios.put(`${process.env.REACT_APP_SERVER_URL}/lists/item`,
+            {
                 listId: props.listId,
                 name,
-                sectionId: props.sectionId
+                section: props.sectionId
             }
         )
-        .then(response => {
-            console.log(response);
-        })
-        .catch(err => {
-            console.log(err);
-        });
     };
 
     return (
