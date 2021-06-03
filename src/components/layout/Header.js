@@ -12,7 +12,7 @@ export default function Header(props) {
     return (
         <div className="header">
             <span className="header__section">
-                <h1>ToDo</h1>
+                <p className="heading heading--lg">Listed</p>
             </span>
             {menu}
         </div>

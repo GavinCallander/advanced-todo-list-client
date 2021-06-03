@@ -25,8 +25,8 @@ export default function Home(props) {
                 modalType={modalType}
             />
             <div className="page__section">
-                <p className="">Don't get twisted</p>
-                <p className="">Get on Listed</p>
+                <p className="content content--one">Don't get twisted</p>
+                <p className="content content--one">Get on Listed</p>
             </div>
             <div className="page__section">
                 <AuthButton
