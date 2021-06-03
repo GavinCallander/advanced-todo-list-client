@@ -2,10 +2,14 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import { ListItem, ListItemModal, ListSection } from '../../helpers';
+
 export default function ListPage({ match }) {
 
     const [listId, setListId] = useState(null);
     const [listData, setListData] = useState({});
+    const [modalOpen, setModalOpen] = useState(false);
+    const [sectionId, setSectionId] = useState("");
 
     useEffect(() => {
         setListId(match.params.id);
@@ -28,12 +32,18 @@ export default function ListPage({ match }) {
 
     let { collaborators, name, owner, sections } = listData;
     
-
+    let className = modalOpen ? "list__item__modal list__item__modal--active" : "list__item__modal";
+    let items;
     let sectionsDisplay = listData && sections ?
         sections.map(section => {
-            return <Section key={section._id} name={section.name} />
-        }):
-        null;
+            section.listItems.length ? 
+                items = sections.listItems.map(listItem => {
+                    return <ListItem name={listItem} />
+                }):
+                items = <ListItem name="Thing" />
+                return<ListSection key={section._id} setModalOpen={setModalOpen} setSectionId={setSectionId} sectionId={section._id} name={section.name}></ListSection>
+                }):
+                null;
 
     /*
         ToDo: 
@@ -45,18 +55,16 @@ export default function ListPage({ match }) {
 
     return (
         <div className="page">
+            <ListItemModal 
+                className={className}
+                listId={listId}
+                sectionId={sectionId}
+            />
             <p className="">{name}</p>
-            {sectionsDisplay}
-            <button className="">Add a new item</button>
+            <div className="list">
+                {sectionsDisplay}
+            </div>
             <Link to="/dashboard">Dashboard</Link>
-        </div>
-    )
-};
-
-function Section(props) {
-    return (
-        <div className="">
-            {props.name}
         </div>
     )
 };
