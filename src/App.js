@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 
-import { Dashboard, Home, List } from './components/pages';
+import { DashboardPage, HomePage, ListPage } from './components/pages';
 import { Header } from './components/layout';
 import { AuthWrapper } from './components/helpers';
 
@@ -53,7 +53,7 @@ export default function App() {
             <Switch>
                 {/* Maybe separate into separate utils file */}
                 <Route exact path={ROUTES.HOME} render={() =>
-                    <Home 
+                    <HomePage
                         handleAuth={handleAuth}
                         user={user}
                     />
@@ -65,14 +65,14 @@ export default function App() {
                     <Route 
                         path={ROUTES.DASHBOARD} 
                         render={() => 
-                        <Dashboard 
+                        <DashboardPage 
                             user={user}
                         />
                     } />
                     <Route 
                         path={`${ROUTES.LIST}/:id`} 
                         render={({ match}) => 
-                        <List 
+                        <ListPage
                             match={match}
                         />
                     } />

@@ -6,7 +6,7 @@ import { ListDisplay, ListModal } from '../../helpers';
 
 import { LIST } from '../../../constants/routes';
 
-export default function Dashboard(props) {
+export default function DashboardPage(props) {
 
     const [lists, setLists] = useState([]);
     const [modalActive, setModalActive] = useState(false);

@@ -5,7 +5,7 @@ import { AuthButton, AuthModal } from '../../helpers';
 
 import { DASHBOARD } from '../../../constants/routes';
 
-export default function Home(props) {
+export default function HomePage(props) {
 
     const [modalActive, setModalActive] = useState(false);
     const [modalType, setModalType] = useState("");

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-export default function List({ match }) {
+export default function ListPage({ match }) {
 
     const [listId, setListId] = useState(null);
     const [listData, setListData] = useState({});
@@ -34,6 +34,14 @@ export default function List({ match }) {
             return <Section key={section._id} name={section.name} />
         }):
         null;
+
+    /*
+        ToDo: 
+            *   List section needs to be able to expand, therefore it must be held inside a container
+            *   You should be able to click on each section to expand, which will reveal controls
+                *   e.g. edit, delete etc.
+            *   Labelling needs to be significantly improved
+    */
 
     return (
         <div className="page">

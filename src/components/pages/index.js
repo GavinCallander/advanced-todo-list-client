@@ -1,5 +1,5 @@
-import Dashboard from './Dashboard';
-import Home from './Home';
-import List from './List';
+import DashboardPage from './Dashboard';
+import HomePage from './Home';
+import ListPage from './List';
 
-export { Dashboard, Home, List };
+export { DashboardPage, HomePage, ListPage };
