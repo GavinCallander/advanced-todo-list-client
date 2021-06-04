@@ -31,8 +31,8 @@ export default function HomePage(props) {
             <div className="page__section">
                 <AuthButton
                     modalActive={modalActive}
-                    setModalActive={setModalActive}
-                    setModalType={setModalType}
+                    setModalActive={props.setModalActive}
+                    setModalType={props.setModalType}
                     text="Sign Up"
                 />
                 <p className="">or</p>

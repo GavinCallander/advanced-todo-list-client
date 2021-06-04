@@ -40,19 +40,25 @@ export default function DashboardPage(props) {
         return <Redirect to={`${LIST}/${route}`} />
     }
 
+    const handleClick = () => {
+        props.setModalActive(true);
+        props.setModalType("List");
+    };
+
     return (
         <div className="page">
-            <ListModal 
+            {/* <ListModal 
                 modalActive={modalActive}
                 setModalActive={setModalActive}
                 setRedirect={setRedirect}
                 setRoute={setRoute}
                 user={props.user}
-            />
+            /> */}
             <h2>My Lists</h2>
             {listsDisplay}
             {/* probably need some copy above here as well as some form of toolbar */}
-            <button onClick={() => setModalActive(true)}>Create a new list</button>
+            {/* <button onClick={() => setModalActive(true)}>Create a new list</button> */}
+            <button onClick={handleClick}>Click</button>
         </div>
     )
 };

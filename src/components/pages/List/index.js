@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { ListItem, ListItemModal, ListSection } from '../../helpers';
 
-export default function ListPage({ match }) {
+export default function ListPage( props ) {
 
     const [listId, setListId] = useState(null);
     const [listData, setListData] = useState({});
@@ -12,9 +12,10 @@ export default function ListPage({ match }) {
     const [sectionId, setSectionId] = useState("");
 
 
+
     useEffect(() => {
-        setListId(match.params.id);
-    }, []);
+        setListId(props.match.params.id);
+    }, [props]);
 
     const fetchListData = () => {
         if (!listId) return;
@@ -44,11 +45,13 @@ export default function ListPage({ match }) {
                     items.push(item);
                 }
             })
-            console.log(items);
+            // console.log(items);
             return <ListSection
                         items={items}
                         key={section._id}
-                        setModalOpen={setModalOpen}
+                        // setModalOpen={setModalOpen}
+                        setModalActive={props.setModalActive}
+                        setModalType={props.setModalType}
                         sectionId={section._id}
                         setSectionId={setSectionId}
                         name={section.name}
@@ -75,13 +78,13 @@ export default function ListPage({ match }) {
 
     return (
         <div className="page">
-            <ListItemModal 
+            {/* <ListItemModal 
                 className={className}
                 itemFields={listData.itemFields}
                 listId={listId}
                 sectionId={sectionId}
                 setModalOpen={setModalOpen}
-            />
+            /> */}
             <p className="">{name}</p>
             <div className="list">
                 {sectionsDisplay}

@@ -71,6 +71,8 @@ export default function App() {
                 <Route exact path={ROUTES.HOME} render={() =>
                     <HomePage
                         handleAuth={handleAuth}
+                        setModalActive={setModalActive}
+                        setModalType={setModalType}
                         user={user}
                     />
                 } />
@@ -82,14 +84,18 @@ export default function App() {
                         path={ROUTES.DASHBOARD} 
                         render={() => 
                         <DashboardPage 
+                            setModalActive={setModalActive}
+                            setModalType={setModalType}
                             user={user}
                         />
                     } />
                     <Route 
                         path={`${ROUTES.LIST}/:id`} 
-                        render={({ match}) => 
+                        render={({ match }) => 
                         <ListPage
                             match={match}
+                            setModalActive={setModalActive}
+                            setModalType={setModalType}
                         />
                     } />
                     <button onClick={handleModal}>Click Me</button>
