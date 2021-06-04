@@ -57,6 +57,7 @@ export default function ListPage({ match }) {
         <div className="page">
             <ListItemModal 
                 className={className}
+                itemFields={listData.itemFields}
                 listId={listId}
                 sectionId={sectionId}
             />
