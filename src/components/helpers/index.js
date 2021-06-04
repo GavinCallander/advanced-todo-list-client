@@ -1,5 +1,6 @@
 import { AuthButton, AuthModal, AuthWrapper } from './Auth';
 import { ListDisplay, ListItem, ListItemModal, ListModal, ListSection } from './List';
+import Modal from './modal/Modal';
 
 export { 
     AuthButton,
@@ -9,5 +10,6 @@ export {
     ListItem,
     ListItemModal, 
     ListModal,
-    ListSection
+    ListSection,
+    Modal
 };

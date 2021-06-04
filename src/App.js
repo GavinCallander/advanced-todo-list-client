@@ -5,6 +5,7 @@ import jwtDecode from 'jwt-decode';
 import { DashboardPage, HomePage, ListPage } from './components/pages';
 import { Header } from './components/layout';
 import { AuthWrapper } from './components/helpers';
+import { Modal } from './components/helpers';
 
 import { setAuthToken } from './modules/setAuthToken';
 
@@ -14,6 +15,8 @@ import * as ROUTES from './constants/routes';
 
 export default function App() {
     
+    const [modalActive, setModalActive] = useState(false);
+    const [modalType, setModalType] = useState("");
     const [user, setUser] = useState(null);
     
     const handleAuth = user => {
@@ -47,8 +50,21 @@ export default function App() {
         decodeToken();
     }, []);
 
+    let modalTypes = ["Auth","List","Item"]
+
+    const handleModal = () => {
+        let i = Math.floor(Math.random() * modalTypes.length);
+        setModalType(modalTypes[i])
+        setModalActive(true);
+    }
+
     return (
         <div className="app">
+            <Modal 
+                modalActive={modalActive}
+                modalType={modalType}
+                setModalActive={setModalActive}
+            />
             <Header user={user} />
             <Switch>
                 {/* Maybe separate into separate utils file */}
@@ -76,6 +92,7 @@ export default function App() {
                             match={match}
                         />
                     } />
+                    <button onClick={handleModal}>Click Me</button>
                 </AuthWrapper>
             </Switch>
         </div>

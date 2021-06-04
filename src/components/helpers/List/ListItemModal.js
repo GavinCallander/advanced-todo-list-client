@@ -13,14 +13,16 @@ export default function ListItemModal(props) {
     const [name, setName] = useState("");
     const [itemFields, setItemFields] = useState([]);
 
-    let tempObj = {
-        Size: "",
-        Quantity: "",
-    };
+    let tempObj = {};
 
     useEffect(() => {
         setItemFields(props.itemFields);
-
+        props.itemFields ?
+            props.itemFields.forEach(field => {
+                tempObj[`${field.name}`] = ""
+            }):
+            console.log(null);
+        console.log(tempObj);
     }, [props.itemFields]);
 
     const submitNewListItem = e => {
