@@ -15,6 +15,7 @@ import * as ROUTES from './constants/routes';
 
 export default function App() {
     
+    // const [modalData, setModalData] = useState();
     const [modalActive, setModalActive] = useState(false);
     const [modalType, setModalType] = useState("");
     const [user, setUser] = useState(null);
@@ -49,14 +50,6 @@ export default function App() {
         };
         decodeToken();
     }, []);
-
-    let modalTypes = ["Auth","List","Item"]
-
-    const handleModal = () => {
-        let i = Math.floor(Math.random() * modalTypes.length);
-        setModalType(modalTypes[i])
-        setModalActive(true);
-    }
 
     return (
         <div className="app">
@@ -98,7 +91,6 @@ export default function App() {
                             setModalType={setModalType}
                         />
                     } />
-                    <button onClick={handleModal}>Click Me</button>
                 </AuthWrapper>
             </Switch>
         </div>
