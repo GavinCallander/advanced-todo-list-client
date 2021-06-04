@@ -13,17 +13,6 @@ export default function ListItemModal(props) {
     const [name, setName] = useState("");
     const [itemFields, setItemFields] = useState([]);
 
-    /*
-        final array should look like so
-        itemFields = [
-            {name: Size, value: 'whatever'},
-            {name: Quantity, value: 'whatever'}
-        ]
-    */
-
-    /*
-        ToDo:   *   
-    */
     let tempObj = {
         Size: "",
         Quantity: "",
@@ -42,9 +31,6 @@ export default function ListItemModal(props) {
             let tempArr = itemFields;
             tempArr.forEach(field => {
                 if (field.name == key) {
-                    console.log("Yay")
-                    console.log(tempObj)
-                    console.log(tempObj[`${key}`]);
                     field.value = tempObj[`${key}`];
                     setItemFields(tempArr);
                 }
@@ -55,6 +41,7 @@ export default function ListItemModal(props) {
         )
         .then(response => {
             console.log(response);
+            props.setModalOpen(false);
         })
         .catch(err => {
             console.log(err);

@@ -11,6 +11,7 @@ export default function ListPage({ match }) {
     const [modalOpen, setModalOpen] = useState(false);
     const [sectionId, setSectionId] = useState("");
 
+
     useEffect(() => {
         setListId(match.params.id);
     }, []);
@@ -60,6 +61,7 @@ export default function ListPage({ match }) {
                 itemFields={listData.itemFields}
                 listId={listId}
                 sectionId={sectionId}
+                setModalOpen={setModalOpen}
             />
             <p className="">{name}</p>
             <div className="list">
