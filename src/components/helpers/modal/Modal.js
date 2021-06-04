@@ -49,7 +49,6 @@ export default function Modal(props) {
         e.preventDefault();
         setData(tempObj);
     };
-    
     //  POST
     const postToAPI = () => {
         axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, { data })
@@ -95,6 +94,25 @@ export default function Modal(props) {
 
 function FormInput(props) {
 
+    let label;
+
+    const handleLabel = (name) => {
+        let tempArr = name.split("");
+        let index;
+        for (let i = 0; i < tempArr.length; i++) {
+            if (i === 0 || tempArr[i-1] === "_") {
+                tempArr[i] = tempArr[i].toUpperCase();
+            }
+            if (tempArr[i] === "_") {
+                index = i;
+            }
+        }
+        tempArr[index] = " ";
+        label = tempArr.join("");
+    };
+    
+    handleLabel(props.field);
+
     const handleChange = e => {
         let name = e.target.getAttribute("name");
         for (let key in props.tempObj) {
@@ -103,11 +121,11 @@ function FormInput(props) {
             }
         }
         return;
-    }
+    };
 
     return (
         <span className="">
-            <p className="">{props.field}</p>
+            <p className="">{label}:</p>
             <input 
                 className="" 
                 name={props.field} 
@@ -119,6 +137,8 @@ function FormInput(props) {
 };
 
 // modal can open and close from anywhere
+
+// labels are being generated dynamically generated
 
 // all data that needs to be passed is stored in a tempObj
     // Dynamically create these based on modalType?
