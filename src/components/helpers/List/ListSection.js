@@ -36,9 +36,18 @@ export default function ListSection(props) {
             <p className="content content--one">{props.name}</p>
         </div>
 
+    let items;
+    let content = sectionActive ?
+        items = props.items.map(item => {
+            return <p className="" key={item._id}>{item.name}</p>
+        }):
+        <div className=""></div>
+
+
     return (
         <div className={className}>
             {header}
+            {content}
         </div>
     )
 };

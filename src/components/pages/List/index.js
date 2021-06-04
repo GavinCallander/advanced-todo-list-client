@@ -35,23 +35,42 @@ export default function ListPage({ match }) {
     
     let className = modalOpen ? "list__item__modal list__item__modal--active" : "list__item__modal";
     let items;
-    let sectionsDisplay = listData && sections ?
+
+    let sectionsDisplay = listData && sections ? 
         sections.map(section => {
-            section.length ? 
-                items = sections.listItems.map(listItem => {
-                    return <ListItem name={listItem} />
-                }):
-                items = <ListItem name="Thing" />
-                return<ListSection key={section._id} setModalOpen={setModalOpen} sectionId={section._id} setSectionId={setSectionId} name={section.name}></ListSection>
-                }):
-                null;
+            let items = [];
+            listData.listItems.map(item => {
+                if (item.section._id == section._id) {
+                    items.push(item);
+                }
+            })
+            console.log(items);
+            return <ListSection
+                        items={items}
+                        key={section._id}
+                        setModalOpen={setModalOpen}
+                        sectionId={section._id}
+                        setSectionId={setSectionId}
+                        name={section.name}
+                    />
+        }):
+        null
+
+
+    // let sectionsDisplay = listData && sections ?
+    //     sections.map(section => {
+    //         section.length ? 
+    //             items = sections.listItems.map(listItem => {
+    //                 return <ListItem name={listItem} />
+    //             }):
+    //             items = <ListItem name="Thing" />
+    //             return<ListSection key={section._id} setModalOpen={setModalOpen} sectionId={section._id} setSectionId={setSectionId} name={section.name}></ListSection>
+    //             }):
+    //             null;
 
     /*
-        ToDo: 
-            *   List section needs to be able to expand, therefore it must be held inside a container
-            *   You should be able to click on each section to expand, which will reveal controls
-                *   e.g. edit, delete etc.
-            *   Labelling needs to be significantly improved
+        ToDo: Complete Section display
+                *   Need to pass down all associated listitems
     */
 
     return (
