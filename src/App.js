@@ -7,7 +7,7 @@ import { Header } from './components/layout';
 import { AuthWrapper } from './components/helpers';
 import { Modal } from './components/helpers';
 
-import { setAuthToken } from './modules/setAuthToken';
+import { setAuthToken } from './modules/auth';
 
 import './styles/main.scss';
 

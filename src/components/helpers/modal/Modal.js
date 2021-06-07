@@ -1,11 +1,20 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import * as METHODS from '../../../modules/apiMethods';
+import * as METHODS from '../../../modules/api';
 
 import * as DATA from '../../../constants/data';
 
 export default function Modal(props) {
+
+    /*
+        list of params which need to be taken by Modal
+        // -   props
+        -   modalActive
+        -   modalType
+        -   methodType
+        -   route
+    */
 
     /*
         modal component must accept:
@@ -43,6 +52,7 @@ export default function Modal(props) {
     }, [DATA, props]);
     
     useEffect(() => {
+        console.log("componentDidUpdate");
         let options = { 
             data, 
             route: "auth/login",
@@ -98,7 +108,6 @@ export default function Modal(props) {
     return (
         <div className={modalClassName}>
             <h1 onClick={() => props.setModalActive(!props.modalActive)}>A modal</h1>
-            <p>for {props.modalType}</p>
             <form onSubmit={e => submitForm(e)}>
                 {inputs}
                 <input 

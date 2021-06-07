@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { setAuthToken } from './setAuthToken';
+import { setAuthToken } from './auth';
 
 /*
     postToApi

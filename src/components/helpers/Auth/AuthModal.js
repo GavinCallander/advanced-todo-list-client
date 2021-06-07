@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-import { setAuthToken } from '../../../modules/setAuthToken';
+// import { setAuthToken } from '../../../modules/methods/auth';
+import { setAuthToken } from '../../../modules/auth';
 
 import { LogInForm, SignUpForm } from './AuthForms';
 

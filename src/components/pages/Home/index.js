@@ -19,12 +19,6 @@ export default function HomePage(props) {
 
     return (
         <div className="page">
-            {/* <AuthModal 
-                handleAuth={props.handleAuth}
-                modalClass={modalClass}
-                modalId={modalId}
-                modalType={modalType}
-            /> */}
             <div className="page__section">
                 <p className="content content--one">Don't get twisted</p>
                 <p className="content content--one">Get on Listed</p>
