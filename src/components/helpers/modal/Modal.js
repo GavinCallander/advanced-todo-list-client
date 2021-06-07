@@ -59,7 +59,7 @@ export default function Modal(props) {
             handleSuccess: props.handleAuth
         };
         if (data[firstKey]) {
-            METHODS.postToApi(options);
+            METHODS.postRequest(options);
             props.setModalActive(false);
         }
     }, [data]);
@@ -80,15 +80,15 @@ export default function Modal(props) {
         });
     };
     //  PUT
-    const putToApi = () => {
-        axios.put(`${process.env.REACT_APP_SERVER_URL}/something`, { data })
-        .then(response => {
-            console.log(response);
-        })
-        .catch(err => {
-            console.log(err);
-        });
-    };
+    // const putToApi = () => {
+    //     axios.put(`${process.env.REACT_APP_SERVER_URL}/something`, { data })
+    //     .then(response => {
+    //         console.log(response);
+    //     })
+    //     .catch(err => {
+    //         console.log(err);
+    //     });
+    // };
     
     // classNames and ids
     let modalClassName = props.modalActive ? "modal modal--active" : "modal";

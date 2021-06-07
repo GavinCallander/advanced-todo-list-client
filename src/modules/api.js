@@ -16,14 +16,42 @@ import { setAuthToken } from './auth';
         -   List
 */
 
-
-
-export const postToApi = ({ data, route, handleSuccess }) => {
+export const deleteRequest = ({ data, route }) => {
+    axios.delete(`${process.env.REACT_APP_SERVER_URL}/${route}`, { data })
+    .then(response => {
+        console.log(response);
+    })
+    .catch(err => {
+        console.log(err);
+    });
+};
+// GET ROUTE
+export const getRequest = ({ data, route }) => {
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/${route}`, { data })
+    .then(response => {
+        console.log(response);
+    })
+    .catch(err => {
+        console.log(err);
+    });
+};
+// POST ROUTE
+export const postRequest = ({ data, route, handleSuccess }) => {
     axios.post(`${process.env.REACT_APP_SERVER_URL}/${route}`, { data })
     .then(response => {
         localStorage.setItem('authToken', response.data.token);
         setAuthToken(response.data.token);
         handleSuccess(response.data.user);
+    })
+    .catch(err => {
+        console.log(err);
+    });
+};
+// PUT ROUTE
+export const putRequest = ({ data, route, handleSuccess, handleError }) => {
+    axios.put(`${process.env.REACT_APP_SERVER_URL}/${route}`, { data })
+    .then(response => {
+        console.log(response);
     })
     .catch(err => {
         console.log(err);

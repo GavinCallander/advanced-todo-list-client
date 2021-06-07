@@ -25,14 +25,14 @@ export default function HomePage(props) {
             </div>
             <div className="page__section">
                 <AuthButton
-                    // modalActive={props.modalActive}
+                    setMethodType={props.setMethodType}
                     setModalActive={props.setModalActive}
                     setModalType={props.setModalType}
                     text="SignUp"
                 />
                 <p className="">or</p>
                 <AuthButton 
-                    // modalActive={modalActive}
+                    setMethodType={props.setMethodType}
                     setModalActive={props.setModalActive}
                     setModalType={props.setModalType}
                     text="LogIn"

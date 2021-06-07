@@ -15,6 +15,7 @@ import * as ROUTES from './constants/routes';
 
 export default function App() {
     
+    const [methodType, setMethodType] = useState("");
     const [modalActive, setModalActive] = useState(false);
     const [modalType, setModalType] = useState("");
     const [user, setUser] = useState(null);
@@ -26,7 +27,6 @@ export default function App() {
     const handleAuth = user => {
         if (user) {
             setUser(user);
-            console.log("We have a user. Hopefully HomePage does it's thing")
         }
         else {
             setUser(null);
@@ -59,6 +59,7 @@ export default function App() {
         <div className="app">
             <Modal 
                 handleAuth={handleAuth}
+                methodType={methodType}
                 modalActive={modalActive}
                 modalType={modalType}
                 setModalActive={setModalActive}
@@ -70,6 +71,7 @@ export default function App() {
                 <Route exact path={ROUTES.HOME} render={() =>
                     <HomePage
                         handleAuth={handleAuth}
+                        setMethodType={setMethodType}
                         setModalActive={setModalActive}
                         setModalType={setModalType}
                         user={user}

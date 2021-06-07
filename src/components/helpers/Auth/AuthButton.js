@@ -2,6 +2,7 @@ export default function AuthButton(props) {
 
     function openModal() {
         if (!props.modalActive) {
+            props.setMethodType("post")
             props.setModalActive(true);
             props.setModalType(props.text);
         }
