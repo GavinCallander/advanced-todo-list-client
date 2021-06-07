@@ -29,8 +29,8 @@
 export const POST = {
     LIST: {
         name: "",
-        section_name: "",
-        field_name: ""
+        sections: [],
+        item_fields: []
     },
     LOGIN: {
         email: "",

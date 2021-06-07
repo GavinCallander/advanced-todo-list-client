@@ -1,19 +1,10 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 
 import * as METHODS from '../../../modules/api';
 
 import * as DATA from '../../../constants/data';
 
 export default function Modal(props) {
-
-    /*
-        list of params which need to be taken by Modal
-        -   modalActive
-        -   modalType
-        -   methodType
-        -   route
-    */
 
     /*
         Modal order of operations:
@@ -26,17 +17,10 @@ export default function Modal(props) {
                     *   if POST, what type of POST?
                         *   if Auth, render login or signup
                         *   if List, render list user flow?
+                            *   How to do this?
+                                *   Separate component?
                 *   PUT
                     *   if PUT, what type of PUT? (start with post and build from there)
-    */
-
-    /*
-        modal component must accept:
-            -   methodType (post, put, get, delete, patch)
-            -   route (which backend route are we hitting)
-            -   must we update state in the function?
-                -   can setState take a function which returns a value?
-                -   perform multiple operations during the setState phase?
     */
 
     const [data, setData] = useState({});
@@ -51,36 +35,61 @@ export default function Modal(props) {
     };
     let tempFields = [];
 
+    const createInputsAndObject = (method, modal) => {
+        setTempObj(DATA[method][modal]);
+        for (let key in DATA[method][modal]) {
+            tempFields.push(key);
+        };
+    };
+
     // did mount
     useEffect(() => {
         console.log("componentDidMount")
     }, []);
 
     useEffect(() => {
-        /*
-            ToDo: Bit verbose and unclean; tidy up
-                *   Possible opportunity for helper function which returns a value inside setState
-        */
+
         console.log("componentDidUpdate")
-        if (props.methodType === "post") {
-            console.log("Yes")
-            for (let keyOne in DATA) {
-                if (keyOne == props.methodType.toUpperCase()) {
-                    console.log(keyOne);
-                    for (let keyTwo in DATA[keyOne]) {
-                        if (keyTwo === props.modalType.toUpperCase()) {
-                            console.log(DATA[keyOne][keyTwo]);
-                            setTempObj(DATA[keyOne][keyTwo]);
-                            for (let keyThree in DATA[keyOne][keyTwo]) {
-                                tempFields.push(keyThree);
-                            };
-                        };
-                    };
-                };
-            };
-        };
+
+        let method = props.methodType;
+        let modal = props.modalType;
+        /*
+            *   Switch statement is integral to being able to create the correct inputs/user flow for the modal
+                *   Can add to and refactor state as required
+        */
+        switch (method) {
+            case 'DELETE':
+                console.log("DELETE")
+                break;
+            case 'POST':
+                console.log("POST");
+                switch (modal) {
+                    case 'LIST':
+                        console.log("LIST: We gotta go with the flow now");
+                        break;
+                    default:
+                        createInputsAndObject(method, modal);
+                        break;
+                }
+                break;
+            case 'PUT':
+                console.log("PUT")
+                switch (modal) {
+                    case 'ITEM': 
+                        console.log("ITEM")
+                        break;
+                    default:
+                        console.log("Just an empty modal")
+                        break;
+                }
+                break;
+            default:
+                console.log("Just an empty modal")
+        }
+
         setTempKey(tempFields[0]);
         setInputFields(tempFields);
+        
     }, [DATA, props]);
     
     useEffect(() => {
@@ -94,7 +103,6 @@ export default function Modal(props) {
     // Form submit
     const submitForm = (e) => {
         e.preventDefault();
-        console.log("submitting")
         console.log(tempObj);
         setData(tempObj);
     };
@@ -104,7 +112,6 @@ export default function Modal(props) {
     
     // Create inputs for each subKey
     let inputs = inputFields.map(field => {
-        console.log(field);
         return (
             <FormInput
                 key={field}

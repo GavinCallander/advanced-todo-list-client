@@ -17,9 +17,9 @@ export default function ListSection(props) {
     const [sectionActive, setSectionActive] = useState(false);
 
     const handleModalOpen = () => {
-        props.setMethodType("put");
+        props.setMethodType("PUT");
         props.setModalActive(true);
-        props.setModalType("Item");
+        props.setModalType("ITEM");
         props.setSectionId(props.sectionId);
     }
 

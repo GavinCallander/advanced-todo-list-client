@@ -49,12 +49,12 @@ export default function ListPage( props ) {
             return <ListSection
                         items={items}
                         key={section._id}
+                        name={section.name}
                         setMethodType={props.setMethodType}
                         setModalActive={props.setModalActive}
                         setModalType={props.setModalType}
                         sectionId={section._id}
                         setSectionId={setSectionId}
-                        name={section.name}
                     />
         }):
         null
