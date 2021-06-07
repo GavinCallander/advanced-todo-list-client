@@ -9,11 +9,25 @@ export default function Modal(props) {
 
     /*
         list of params which need to be taken by Modal
-        // -   props
         -   modalActive
         -   modalType
         -   methodType
         -   route
+    */
+
+    /*
+        Modal order of operations:
+            *   Modal is activated
+                *   Mounts
+            *   Want to confirm what type of modal it is to begin with
+                *   DELETE
+                    *   if DELETE, just a confirm box
+                *   POST
+                    *   if POST, what type of POST?
+                        *   if Auth, render login or signup
+                        *   if List, render list user flow?
+                *   PUT
+                    *   if PUT, what type of PUT? (start with post and build from there)
     */
 
     /*
@@ -27,9 +41,14 @@ export default function Modal(props) {
 
     const [data, setData] = useState({});
     const [inputFields, setInputFields] = useState([]);
-    const [firstKey, setFirstKey] = useState("");
+    const [tempKey, setTempKey] = useState("");
     const [tempObj, setTempObj] = useState({});
-
+    
+    
+    let options = { 
+        data, 
+        route: props.route
+    };
     let tempFields = [];
 
     // did mount
@@ -38,63 +57,54 @@ export default function Modal(props) {
     }, []);
 
     useEffect(() => {
+        /*
+            ToDo: Bit verbose and unclean; tidy up
+                *   Possible opportunity for helper function which returns a value inside setState
+        */
         console.log("componentDidUpdate")
-        for (let key in DATA) {
-            if (key == props.modalType.toUpperCase()) {
-                setTempObj(DATA[key]);
-                for (let subKey in DATA[key]) {
-                    tempFields.push(subKey);
-                }
+        if (props.methodType === "post") {
+            console.log("Yes")
+            for (let keyOne in DATA) {
+                if (keyOne == props.methodType.toUpperCase()) {
+                    console.log(keyOne);
+                    for (let keyTwo in DATA[keyOne]) {
+                        if (keyTwo === props.modalType.toUpperCase()) {
+                            console.log(DATA[keyOne][keyTwo]);
+                            setTempObj(DATA[keyOne][keyTwo]);
+                            for (let keyThree in DATA[keyOne][keyTwo]) {
+                                tempFields.push(keyThree);
+                            };
+                        };
+                    };
+                };
             };
         };
-        setFirstKey(tempFields[0]);
+        setTempKey(tempFields[0]);
         setInputFields(tempFields);
     }, [DATA, props]);
     
     useEffect(() => {
-        console.log("componentDidUpdate");
-        let options = { 
-            data, 
-            route: "auth/login",
-            handleSuccess: props.handleAuth
-        };
-        if (data[firstKey]) {
+        // this effect hook should hit the api
+        if (data[tempKey]) {
             METHODS.postRequest(options);
             props.setModalActive(false);
         }
     }, [data]);
 
-    // API CALLS
+    // Form submit
     const submitForm = (e) => {
         e.preventDefault();
+        console.log("submitting")
+        console.log(tempObj);
         setData(tempObj);
     };
-    //  POST
-    const postToApi = () => {
-        axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, { data })
-        .then(response => {
-            console.log(response);
-        })
-        .catch(err => {
-            console.log(err);
-        });
-    };
-    //  PUT
-    // const putToApi = () => {
-    //     axios.put(`${process.env.REACT_APP_SERVER_URL}/something`, { data })
-    //     .then(response => {
-    //         console.log(response);
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //     });
-    // };
     
     // classNames and ids
     let modalClassName = props.modalActive ? "modal modal--active" : "modal";
     
     // Create inputs for each subKey
     let inputs = inputFields.map(field => {
+        console.log(field);
         return (
             <FormInput
                 key={field}

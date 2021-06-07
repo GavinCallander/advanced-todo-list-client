@@ -41,6 +41,7 @@ export default function DashboardPage(props) {
     }
 
     const handleClick = () => {
+        props.setMethodType("post");
         props.setModalActive(true);
         props.setModalType("List");
     };

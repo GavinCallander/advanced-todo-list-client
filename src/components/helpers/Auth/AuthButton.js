@@ -5,6 +5,7 @@ export default function AuthButton(props) {
             props.setMethodType("post")
             props.setModalActive(true);
             props.setModalType(props.text);
+            props.setRoute(props.route);
         }
         return;
     };

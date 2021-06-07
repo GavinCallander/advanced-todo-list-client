@@ -6,6 +6,10 @@ import { AuthButton } from '../../helpers';
 import { DASHBOARD } from '../../../constants/routes';
 
 export default function HomePage(props) {
+
+    /*
+        ToDo: Refactor! Auth Buttons are can be mapped = dryer code
+    */
     
     const [redirect, setRedirect] = useState(false);
 
@@ -25,16 +29,20 @@ export default function HomePage(props) {
             </div>
             <div className="page__section">
                 <AuthButton
+                    route="auth/signup"
                     setMethodType={props.setMethodType}
                     setModalActive={props.setModalActive}
                     setModalType={props.setModalType}
+                    setRoute={props.setRoute}
                     text="SignUp"
                 />
                 <p className="">or</p>
-                <AuthButton 
+                <AuthButton
+                    route="auth/login"
                     setMethodType={props.setMethodType}
                     setModalActive={props.setModalActive}
                     setModalType={props.setModalType}
+                    setRoute={props.setRoute}
                     text="LogIn"
                 />
             </div>

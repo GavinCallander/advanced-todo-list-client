@@ -18,6 +18,7 @@ export default function App() {
     const [methodType, setMethodType] = useState("");
     const [modalActive, setModalActive] = useState(false);
     const [modalType, setModalType] = useState("");
+    const [route, setRoute] = useState("");
     const [user, setUser] = useState(null);
 
     // best practice would be to bundle what is actually needed
@@ -62,6 +63,7 @@ export default function App() {
                 methodType={methodType}
                 modalActive={modalActive}
                 modalType={modalType}
+                route={route}
                 setModalActive={setModalActive}
                 setUser={setUser}
             />
@@ -74,6 +76,7 @@ export default function App() {
                         setMethodType={setMethodType}
                         setModalActive={setModalActive}
                         setModalType={setModalType}
+                        setRoute={setRoute}
                         user={user}
                     />
                 } />
@@ -85,8 +88,10 @@ export default function App() {
                         path={ROUTES.DASHBOARD} 
                         render={() => 
                         <DashboardPage 
+                            setMethodType={setMethodType}
                             setModalActive={setModalActive}
                             setModalType={setModalType}
+                            setRoute={setRoute}
                             user={user}
                         />
                     } />
@@ -95,8 +100,10 @@ export default function App() {
                         render={({ match }) => 
                         <ListPage
                             match={match}
+                            setMethodType={setMethodType}
                             setModalActive={setModalActive}
                             setModalType={setModalType}
+                            setRoute={setRoute}
                         />
                     } />
                 </AuthWrapper>
