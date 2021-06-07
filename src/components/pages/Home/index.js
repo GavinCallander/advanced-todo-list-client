@@ -1,20 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { AuthButton, AuthModal } from '../../helpers';
+import { AuthButton } from '../../helpers';
 
 import { DASHBOARD } from '../../../constants/routes';
 
 export default function HomePage(props) {
+    
+    const [redirect, setRedirect] = useState(false);
 
-    // const [modalActive, setModalActive] = useState(false);
-    // const [modalType, setModalType] = useState("");
+    useEffect(() => {
+        if (props.user) {
+            setRedirect(true);
+        }
+    }, [props.user]);
 
-    // let modalClass = modalActive ? "auth-modal auth-modal--active" : "auth-modal";
-
-    // let modalId = modalType === "Sign Up" ? "sign-up" : "log-in";
-
-    if (props.user) return <Redirect to={DASHBOARD} />
+    if (redirect) return <Redirect to={DASHBOARD} />
 
     return (
         <div className="page">

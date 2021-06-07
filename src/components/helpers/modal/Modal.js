@@ -1,9 +1,20 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+import * as METHODS from '../../../modules/apiMethods';
+
 import * as DATA from '../../../constants/data';
 
 export default function Modal(props) {
+
+    /*
+        modal component must accept:
+            -   methodType (post, put, get, delete, patch)
+            -   route (which backend route are we hitting)
+            -   must we update state in the function?
+                -   can setState take a function which returns a value?
+                -   perform multiple operations during the setState phase?
+    */
 
     const [data, setData] = useState({});
     const [inputFields, setInputFields] = useState([]);
@@ -11,13 +22,6 @@ export default function Modal(props) {
     const [tempObj, setTempObj] = useState({});
 
     let tempFields = [];
-
-    // Order of operation
-        // once modalActive and modalType are updated in App.js they are received as props by Modal
-            // modalActive:true triggers a renaming of modalClassname
-                // modal is displaeyed
-            // modalType impacts what is displayed on screen
-              // data objects stored in constants are used as temporary objects to store data
 
     // did mount
     useEffect(() => {
@@ -39,8 +43,14 @@ export default function Modal(props) {
     }, [DATA, props]);
     
     useEffect(() => {
+        let options = { 
+            data, 
+            route: "auth/login",
+            handleSuccess: props.handleAuth
+        };
         if (data[firstKey]) {
-            postToAPI();
+            METHODS.postToApi(options);
+            props.setModalActive(false);
         }
     }, [data]);
 
@@ -50,7 +60,7 @@ export default function Modal(props) {
         setData(tempObj);
     };
     //  POST
-    const postToAPI = () => {
+    const postToApi = () => {
         axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, { data })
         .then(response => {
             console.log(response);
@@ -60,7 +70,16 @@ export default function Modal(props) {
         });
     };
     //  PUT
-
+    const putToApi = () => {
+        axios.put(`${process.env.REACT_APP_SERVER_URL}/something`, { data })
+        .then(response => {
+            console.log(response);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    };
+    
     // classNames and ids
     let modalClassName = props.modalActive ? "modal modal--active" : "modal";
     
@@ -138,7 +157,7 @@ function FormInput(props) {
 
 // modal can open and close from anywhere
 
-// labels are being generated dynamically generated
+// labels are being generated dynamically generated 
 
 // all data that needs to be passed is stored in a tempObj
     // Dynamically create these based on modalType?

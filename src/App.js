@@ -15,14 +15,18 @@ import * as ROUTES from './constants/routes';
 
 export default function App() {
     
-    // const [modalData, setModalData] = useState();
     const [modalActive, setModalActive] = useState(false);
     const [modalType, setModalType] = useState("");
     const [user, setUser] = useState(null);
-    
+
+    // best practice would be to bundle what is actually needed
+    // together and pass to the modal, rather than everything
+    // can do this at each individual page
+
     const handleAuth = user => {
         if (user) {
             setUser(user);
+            console.log("We have a user. Hopefully HomePage does it's thing")
         }
         else {
             setUser(null);
@@ -54,9 +58,11 @@ export default function App() {
     return (
         <div className="app">
             <Modal 
+                handleAuth={handleAuth}
                 modalActive={modalActive}
                 modalType={modalType}
                 setModalActive={setModalActive}
+                setUser={setUser}
             />
             <Header user={user} />
             <Switch>
