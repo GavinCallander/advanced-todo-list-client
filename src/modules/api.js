@@ -51,8 +51,11 @@ export const postRequest = ({ data, route }) => {
     console.log(route); 
     axios.post(`${process.env.REACT_APP_SERVER_URL}/${route}`, { data })
     .then(response => {
-        localStorage.setItem('authToken', response.data.token);
-        setAuthToken(response.data.token);
+        if (response.data.token) {
+            localStorage.setItem('authToken', response.data.token);
+            setAuthToken(response.data.token);
+        }
+        console.log(response);
     })
     .catch(err => {
         console.log(err);
@@ -60,7 +63,7 @@ export const postRequest = ({ data, route }) => {
 };
 
 // PUT ROUTE
-export const putRequest = ({ data, route, handleSuccess, handleError }) => {
+export const putRequest = ({ data, route }) => {
     axios.put(`${process.env.REACT_APP_SERVER_URL}/${route}`, { data })
     .then(response => {
         console.log(response);

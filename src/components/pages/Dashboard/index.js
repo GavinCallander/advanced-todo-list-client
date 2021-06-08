@@ -9,7 +9,6 @@ import { LIST } from '../../../constants/routes';
 export default function DashboardPage(props) {
 
     const [lists, setLists] = useState([]);
-    const [modalActive, setModalActive] = useState(false);
     const [redirect, setRedirect] = useState(false);
     const [route, setRoute] = useState("");
 
@@ -25,7 +24,7 @@ export default function DashboardPage(props) {
 
     useEffect(() => {
         fetchLists();
-    }, []);
+    }, [props.user]);
 
     let listsDisplay = lists.map(list => {
         return <ListDisplay 
@@ -44,6 +43,7 @@ export default function DashboardPage(props) {
         props.setMethodType("POST");
         props.setModalActive(true);
         props.setModalType("LIST");
+        props.setRoute("lists")
     };
 
     return (
