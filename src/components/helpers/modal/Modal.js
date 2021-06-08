@@ -48,6 +48,8 @@ export default function Modal(props) {
     };
 
     const createListFormFlow = (method, modal) => {
+        // console.log(DATA[method][modal]);
+        DATA[method][modal].owner = props.user._id;
         setTempData(DATA[method][modal]);
         for (let key in DATA[method][modal]) {
             tempFields.push(key);
@@ -75,8 +77,6 @@ export default function Modal(props) {
 
     const addNewFieldOrSection = (type) => {
         let tempObj = tempData;
-        console.log("type:", type);
-        console.log("tempObj:", tempObj);
         tempObj[type].push({ name: tempVal });
         setTempVal("");
         setTempData(tempObj);
@@ -92,20 +92,12 @@ export default function Modal(props) {
     //     return;
     // };
 
+    // handles form flow and data storage for specific modal
     useEffect(() => {
-
         console.log("componentDidUpdate")
-
         let method = props.methodType;
         let modal = props.modalType;
-        /*
-            *   Switch statement is integral to being able to create the correct inputs/user flow for the modal
-                *   Can add to and refactor state as required
-        */
         switch (method) {
-            case 'DELETE':
-                console.log("DELETE")
-                break;
             case 'POST':
                 console.log("POST");
                 switch (modal) {
@@ -127,12 +119,10 @@ export default function Modal(props) {
                 }
                 break;
             default:
-                console.log("This is not the modal you're looking for");
-        }
-
+                console.log("Deleting, I take it?");
+        };
         setTempKey(tempFields[0]);
         setInputFields(tempFields);
-
     }, [DATA, props]);
     // posts to API once data is set
     useEffect(() => {
@@ -180,7 +170,6 @@ export default function Modal(props) {
                     setTempData={setTempData} 
                     tempData={tempData} 
                     handleInputChange={handleInputChange}
-                    value={tempVal}
                 />
             </span>:
             // sections or fields of list form

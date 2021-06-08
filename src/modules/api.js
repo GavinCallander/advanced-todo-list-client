@@ -55,10 +55,13 @@ export const postRequest = ({ data, route }) => {
             localStorage.setItem('authToken', response.data.token);
             setAuthToken(response.data.token);
         }
-        console.log(response);
+        if (response.data.user) {
+            return response.data.user;
+        }
     })
     .catch(err => {
         console.log(err);
+        return err;
     });
 };
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
-import { ListDisplay, ListModal } from '../../helpers';
+import { ListDisplay } from '../../helpers';
 
 import { LIST } from '../../../constants/routes';
 

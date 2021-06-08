@@ -66,6 +66,7 @@ export default function App() {
                 route={route}
                 setModalActive={setModalActive}
                 setUser={setUser}
+                user={user}
             />
             <Header user={user} />
             <Switch>

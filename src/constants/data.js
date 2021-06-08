@@ -10,8 +10,6 @@
 //     password_confirm: ""
 // };
 // export const LIST = {
-//     currentSection: "",
-//     currentField: "",
 //     itemFields: [],
 //     name: "",
 //     owner: "",
@@ -30,7 +28,8 @@ export const POST = {
     LIST: {
         name: "",
         sections: [],
-        item_fields: []
+        item_fields: [],
+        owner: ""
     },
     LOGIN: {
         email: "",
