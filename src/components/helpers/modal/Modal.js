@@ -36,7 +36,10 @@ export default function Modal(props) {
                     });
                 };
             };
-        };
+        } else {
+            console.log(props.userData)
+            console.log("WTF?")
+        }
         for (let key in DATA[method][modal]) {
             tempObj[key] = DATA[method][modal][key];
             tempFields.unshift(key);
@@ -62,13 +65,19 @@ export default function Modal(props) {
             setTempVal(e.target.value);
             return;
         }
-
-
         let name = e.target.getAttribute("name");
         let tempObj = tempData;
-        console.log(tempObj[name]);
-        console.log(tempObj);
-        tempObj[name] = e.target.value;
+        if (name !== "name") {
+            tempObj.item_fields.forEach(field => {
+                if (field.name === name) {
+                    console.log("Woohoo, we have " + name);
+                    field.value = e.target.value;
+                    console.log(field.value);
+                }
+            })
+        } else {
+            tempObj.name = e.target.value;
+        }
         // console.log(tempObj[name]);
         setTempData(tempObj);
     };
@@ -144,7 +153,6 @@ export default function Modal(props) {
     // Form submit
     const submitForm = (e) => {
         e.preventDefault();
-        console.log(tempData);
         setData(tempData);
     };
     
