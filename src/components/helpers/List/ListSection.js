@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -17,10 +17,14 @@ export default function ListSection(props) {
     const [sectionActive, setSectionActive] = useState(false);
 
     const handleModalOpen = () => {
+        let tempObj = props.userData;
+        console.log("tempObj", tempObj);
+        tempObj.section_id = props.sectionId;
         props.setMethodType("PUT");
         props.setModalActive(true);
         props.setModalType("ITEM");
-        props.setSectionId(props.sectionId);
+        props.setRoute("lists/item");
+        props.setUserData(tempObj);
     }
 
     let className = sectionActive ? "list__section list__section--active" : "list__section"; 

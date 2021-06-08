@@ -6,23 +6,6 @@ import * as DATA from '../../../constants/data';
 
 export default function Modal(props) {
 
-    /*
-        Modal order of operations:
-            *   Modal is activated
-                *   Mounts
-            *   Want to confirm what type of modal it is to begin with
-                *   DELETE
-                    *   if DELETE, just a confirm box
-                *   POST
-                    *   if POST, what type of POST?
-                        *   if Auth, render login or signup
-                        *   if List, render list user flow?
-                            *   How to do this?
-                                *   Separate component?
-                *   PUT
-                    *   if PUT, what type of PUT? (start with post and build from there)
-    */
-
     const [data, setData] = useState({});
     const [formPage, setFormPage] = useState(0);
     const [inputFields, setInputFields] = useState([]);
@@ -31,7 +14,7 @@ export default function Modal(props) {
     const [tempVal, setTempVal] = useState("");
     
     let options = { 
-        data, 
+        data,
         route: props.route,
         setUser: props.setUser
     };
@@ -41,17 +24,20 @@ export default function Modal(props) {
         ToDo: Work out if there's any difference between tempFields in a List vs Auth
     */
 
-    const createInputsAndObject = (method, modal) => {
-        setTempData(DATA[method][modal]);
+    const createInputsAndObject = (method, modal, userData) => {
+        console.log("Dealing with inputs and object");
         for (let key in DATA[method][modal]) {
             tempFields.push(key);
         };
+        if (userData) { 
+            console.log(userData);
+        }
+        // setTempData(DATA[method][modal]);
     };
 
-    const createListFormFlow = (method, modal) => {
-        // console.log(DATA[method][modal]);
-        DATA[method][modal].owner = props.user._id;
+    const createListFormFlow = (method, modal ) => {
         setTempData(DATA[method][modal]);
+        DATA[method][modal].owner = props.user._id;
         for (let key in DATA[method][modal]) {
             tempFields.push(key);
         }
@@ -105,7 +91,6 @@ export default function Modal(props) {
                     case 'LIST':
                         setFormPage(1);
                         createListFormFlow(method, modal);
-                        // console.log("LIST: We gotta go with the flow now");
                         break;
                     default:
                         createInputsAndObject(method, modal);
@@ -113,14 +98,16 @@ export default function Modal(props) {
                 }
                 break;
             case 'PUT':
+                console.log(props.userData);
                 console.log("PUT")
                 switch (modal) {
                     default:
+                        createInputsAndObject(method, modal, props.userData);
                         break;
                 }
                 break;
             default:
-                console.log("Deleting, I take it?");
+                return;
         };
         setTempKey(tempFields[0]);
         setInputFields(tempFields);
@@ -128,9 +115,18 @@ export default function Modal(props) {
     // posts to API once data is set
     useEffect(() => {
         // this effect hook should hit the api
-        console.log(data);
+        console.log(props.methodType)
         if (data[tempKey]) {
-            METHODS.postRequest(options);
+            switch (props.methodType) {
+                case "PUT":
+                    console.log("Updating")
+                    METHODS.putRequest(options);
+                    // props.setModalActive(false);
+                    break;
+                default:
+                    console.log("Posting")
+                    METHODS.postRequest(options);
+            }
             props.setModalActive(false);
         }
     }, [data]);
@@ -201,7 +197,7 @@ export default function Modal(props) {
                     {/* cancel if pageOne */}
                     <button 
                         className={btnClassName}
-                        disabled={formPage === 1}
+                        disabled={formPage <= 1}
                         onClick={() => setFormPage(formPage - 1)} 
                         type="button"
                     >

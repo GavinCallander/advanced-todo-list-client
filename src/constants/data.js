@@ -28,8 +28,7 @@ export const POST = {
     LIST: {
         name: "",
         sections: [],
-        item_fields: [],
-        owner: ""
+        item_fields: []
     },
     LOGIN: {
         email: "",
@@ -46,10 +45,6 @@ export const POST = {
 // PUT form data
 export const PUT = {
     ITEM: {
-        itemFields: [],
-        listId: "",
-        listData: {},
         name: "",
-        sectionId: ""
     }
 };

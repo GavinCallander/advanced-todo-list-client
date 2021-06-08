@@ -20,6 +20,7 @@ export default function App() {
     const [modalType, setModalType] = useState("");
     const [route, setRoute] = useState("");
     const [user, setUser] = useState(null);
+    const [userData, setUserData] = useState(null);
 
     // best practice would be to bundle what is actually needed
     // together and pass to the modal, rather than everything
@@ -57,7 +58,9 @@ export default function App() {
         decodeToken();
     }, []);
 
-
+    useEffect(() => {
+        // console.log(userData);
+    }, [userData])
     
     return (
         <div className="app">
@@ -70,6 +73,7 @@ export default function App() {
                 setModalActive={setModalActive}
                 setUser={setUser}
                 user={user}
+                userData={userData}
             />
             <Header user={user} />
             <Switch>
@@ -108,6 +112,8 @@ export default function App() {
                             setModalActive={setModalActive}
                             setModalType={setModalType}
                             setRoute={setRoute}
+                            setUserData={setUserData}
+                            userData={userData}
                         />
                     } />
                 </AuthWrapper>

@@ -8,14 +8,17 @@ export default function ListPage( props ) {
 
     const [listId, setListId] = useState(null);
     const [listData, setListData] = useState({});
-    const [modalOpen, setModalOpen] = useState(false);
-    const [sectionId, setSectionId] = useState("");
-
-
 
     useEffect(() => {
         setListId(props.match.params.id);
     }, [props]);
+
+    useEffect(() => {
+        let tempObj = {};
+        tempObj.list_id = listData._id;
+        tempObj.itemFields = listData.item_fields;
+        props.setUserData(tempObj);
+    }, [listData]);
 
     const fetchListData = () => {
         if (!listId) return;
@@ -33,14 +36,11 @@ export default function ListPage( props ) {
     }, [listId]);
 
     let { collaborators, name, owner, sections } = listData;
-    
-    let className = modalOpen ? "list__item__modal list__item__modal--active" : "list__item__modal";
-    let items;
 
     let sectionsDisplay = listData && sections ? 
         sections.map(section => {
             let items = [];
-            listData.listItems.map(item => {
+            listData.list_items.map(item => {
                 if (item.section._id == section._id) {
                     items.push(item);
                 }
@@ -53,8 +53,10 @@ export default function ListPage( props ) {
                         setMethodType={props.setMethodType}
                         setModalActive={props.setModalActive}
                         setModalType={props.setModalType}
+                        setRoute={props.setRoute}
                         sectionId={section._id}
-                        setSectionId={setSectionId}
+                        setUserData={props.setUserData}
+                        userData={props.userData}
                     />
         }):
         null

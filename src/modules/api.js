@@ -2,29 +2,6 @@ import axios from 'axios';
 
 import { setAuthToken } from './auth';
 
-/*
-    postToApi
-    *   need to define the data to be posted
-    *   need to define the route for the func to hit
-    *   need to do something with response or error
-    Options: { data, route, handleSuccess, handleError };
-
-    DELETE routes required:
-        -   List
-        -   List Item
-    POST routes required:   
-        -   Auth
-            -   Login
-            -   Signup
-        -   List
-            -   With user flow
-    PUT routes required:
-        -   List
-            -   Updating collaborators; fields etc.
-        -   ListItem
-            -   For creating a new item
-*/
-
 export const deleteRequest = ({ data, route }) => {
     axios.delete(`${process.env.REACT_APP_SERVER_URL}/${route}`, { data })
     .then(response => {
@@ -67,6 +44,8 @@ export const postRequest = ({ data, route, setUser }) => {
 
 // PUT ROUTE
 export const putRequest = ({ data, route }) => {
+    console.log(data);
+    console.log("Updating");
     axios.put(`${process.env.REACT_APP_SERVER_URL}/${route}`, { data })
     .then(response => {
         console.log(response);
