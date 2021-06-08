@@ -32,7 +32,8 @@ export default function Modal(props) {
     
     let options = { 
         data, 
-        route: props.route
+        route: props.route,
+        setUser: props.setUser
     };
     let tempFields = [];
 

@@ -35,27 +35,30 @@ export default function App() {
         };
     };
     
-    useEffect(() => {
-        const decodeToken = currentToken => {
-            let token = currentToken || localStorage.getItem('authToken');
-            if (token) {
-                let decoded = jwtDecode(token);
-                if (!decoded || Date.now() >= decoded.exp * 1000) {
-                    setUser(null);
-                }
-                else {
-                    setAuthToken(token);
-                    setUser(decoded);
-                    handleAuth(decoded);
-                };
+    const decodeToken = currentToken => {
+        let token = currentToken || localStorage.getItem('authToken');
+        if (token) {
+            let decoded = jwtDecode(token);
+            if (!decoded || Date.now() >= decoded.exp * 1000) {
+                setUser(null);
             }
             else {
-                setUser(null);
+                setAuthToken(token);
+                setUser(decoded);
+                handleAuth(decoded);
             };
+        }
+        else {
+            setUser(null);
         };
+    };
+
+    useEffect(() => {
         decodeToken();
     }, []);
 
+
+    
     return (
         <div className="app">
             <Modal 

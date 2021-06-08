@@ -47,17 +47,17 @@ export const getRequest = ({ data, route }) => {
 };
 
 // POST ROUTE
-export const postRequest = ({ data, route }) => {
+export const postRequest = ({ data, route, setUser }) => {
     console.log(route); 
     axios.post(`${process.env.REACT_APP_SERVER_URL}/${route}`, { data })
     .then(response => {
         if (response.data.token) {
             localStorage.setItem('authToken', response.data.token);
             setAuthToken(response.data.token);
-        }
+        };
         if (response.data.user) {
-            return response.data.user;
-        }
+            setUser(response.data.user);
+        };
     })
     .catch(err => {
         console.log(err);
