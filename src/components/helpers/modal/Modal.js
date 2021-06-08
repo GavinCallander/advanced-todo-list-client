@@ -26,13 +26,22 @@ export default function Modal(props) {
 
     const createInputsAndObject = (method, modal, userData) => {
         console.log("Dealing with inputs and object");
-        for (let key in DATA[method][modal]) {
-            tempFields.push(key);
-        };
+        let tempObj;
         if (userData) { 
-            console.log(userData);
-        }
-        // setTempData(DATA[method][modal]);
+            tempObj = userData;
+            for (let key in userData) {
+                if (typeof(userData[key]) !== "string") {
+                    userData[key].forEach(datum => {
+                        tempFields.push(datum.name);
+                    });
+                };
+            };
+        };
+        for (let key in DATA[method][modal]) {
+            tempObj[key] = DATA[method][modal][key];
+            tempFields.unshift(key);
+        };
+        setTempData(tempObj);
     };
 
     const createListFormFlow = (method, modal ) => {
@@ -49,14 +58,16 @@ export default function Modal(props) {
     }, []);
 
     const handleInputChange = e => {
-        // console.log(tempData);
         if (formPage > 1) {
             setTempVal(e.target.value);
             return;
         }
+
+
         let name = e.target.getAttribute("name");
         let tempObj = tempData;
-        // console.log(tempObj[name]);
+        console.log(tempObj[name]);
+        console.log(tempObj);
         tempObj[name] = e.target.value;
         // console.log(tempObj[name]);
         setTempData(tempObj);
@@ -98,7 +109,6 @@ export default function Modal(props) {
                 }
                 break;
             case 'PUT':
-                console.log(props.userData);
                 console.log("PUT")
                 switch (modal) {
                     default:
@@ -134,6 +144,7 @@ export default function Modal(props) {
     // Form submit
     const submitForm = (e) => {
         e.preventDefault();
+        console.log(tempData);
         setData(tempData);
     };
     
@@ -210,7 +221,7 @@ export default function Modal(props) {
                     />
                     <button
                         className={btnClassName}
-                        disabled={formPage === inputFields.length}
+                        disabled={formPage >= inputFields.length - 1}
                         onClick={() => setFormPage(formPage + 1)} 
                         type="button"
                     >

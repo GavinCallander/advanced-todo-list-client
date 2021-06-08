@@ -16,7 +16,7 @@ export default function ListPage( props ) {
     useEffect(() => {
         let tempObj = {};
         tempObj.list_id = listData._id;
-        tempObj.itemFields = listData.item_fields;
+        tempObj.item_fields = listData.item_fields;
         props.setUserData(tempObj);
     }, [listData]);
 

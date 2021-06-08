@@ -18,7 +18,6 @@ export default function ListSection(props) {
 
     const handleModalOpen = () => {
         let tempObj = props.userData;
-        console.log("tempObj", tempObj);
         tempObj.section_id = props.sectionId;
         props.setMethodType("PUT");
         props.setModalActive(true);
