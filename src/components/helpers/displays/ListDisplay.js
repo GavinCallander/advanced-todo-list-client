@@ -8,8 +8,6 @@ export default function ListDisplay(props) {
         console.log("componentDidMount");
     }, []);
 
-    if (props.listData) console.log(props.listData);
-
     let sections = props.listData && props.listData.sections ?
         props.listData.sections.map(section => {
             let items = [];
@@ -31,7 +29,7 @@ export default function ListDisplay(props) {
             null;
 
     return (
-        <div>
+        <div className="list">
             {sections}
         </div>
     )

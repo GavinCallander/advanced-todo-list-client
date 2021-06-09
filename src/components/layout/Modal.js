@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import * as METHODS from '../../modules/api';
-
 import * as DATA from '../../constants/data';
+
+import * as METHODS from '../../modules/api';
 
 export default function Modal(props) {
 
@@ -25,8 +25,15 @@ export default function Modal(props) {
     */
 
     const createInputsAndObject = (method, modal, userData) => {
-        // console.log("Dealing with inputs and object");
-        let tempObj;
+        console.log("Dealing with inputs and object");
+        let tempObj = {};
+        for (let key in DATA[method][modal]) {
+            // console.log(tempObj);
+            // console.log(key);
+            // console.log(DATA[method][modal]);
+            tempObj[key] = DATA[method][modal][key];
+            tempFields.push(key);
+        };
         if (userData) { 
             tempObj = userData;
             for (let key in userData) {
@@ -39,10 +46,6 @@ export default function Modal(props) {
         } else {
             // console.log(props.userData)
         }
-        for (let key in DATA[method][modal]) {
-            tempObj[key] = DATA[method][modal][key];
-            tempFields.unshift(key);
-        };
         setTempData(tempObj);
     };
 
@@ -66,16 +69,18 @@ export default function Modal(props) {
         }
         let name = e.target.getAttribute("name");
         let tempObj = tempData;
-        if (name !== "name") {
+        if (tempObj.item_fields) {
+        // if (name !== "name") {
             tempObj.item_fields.forEach(field => {
                 if (field.name === name) {
+                    console.log(field.name);
                     field.value = e.target.value;
                 }
             })
         } else {
-            tempObj.name = e.target.value;
+            tempObj[name] = e.target.value;
         }
-        // console.log(tempObj[name]);
+        console.log(tempObj[name]);
         setTempData(tempObj);
     };
 
@@ -125,29 +130,34 @@ export default function Modal(props) {
             default:
                 return;
         };
-        setTempKey(tempFields[0]);
         setInputFields(tempFields);
     }, [DATA, props]);
     // posts to API once data is set
     useEffect(() => {
+        console.log("data changed")
+        console.log(props.methodType);
         // this effect hook should hit the api
-        if (data[tempKey]) {
-            switch (props.methodType) {
-                case "PUT":
-                    METHODS.putRequest(options);
-                    // props.setModalActive(false);
-                    break;
-                default:
-                    console.log("Posting")
-                    METHODS.postRequest(options);
-            }
-            props.setModalActive(false);
+        switch (props.methodType) {
+            case "PUT":
+                console.log("Put")
+                METHODS.putRequest(options);
+                // props.setModalActive(false);
+                break;
+            case "POST":
+                console.log("Posting")
+                METHODS.postRequest(options);
+                break;
+            default:
+                console.log("Nothing?")
+                break;
+        props.setModalActive(false);
         }
     }, [data]);
 
     // Form submit
     const submitForm = (e) => {
         e.preventDefault();
+        console.log("Submitting")
         setData(tempData);
     };
     
