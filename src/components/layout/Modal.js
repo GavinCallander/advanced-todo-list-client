@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import * as METHODS from '../../../modules/api';
+import * as METHODS from '../../modules/api';
 
-import * as DATA from '../../../constants/data';
+import * as DATA from '../../constants/data';
 
 export default function Modal(props) {
 

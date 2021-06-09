@@ -3,9 +3,10 @@ import { Route, Switch } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 
 import { DashboardPage, HomePage, ListPage } from './components/pages';
-import { Header } from './components/layout';
+
+import { Header, Modal } from './components/layout';
+
 import { AuthWrapper } from './components/helpers';
-import { Modal } from './components/helpers';
 
 import { setAuthToken } from './modules/auth';
 
