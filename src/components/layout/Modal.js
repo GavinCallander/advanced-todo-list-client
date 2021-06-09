@@ -134,7 +134,6 @@ export default function Modal(props) {
     // posts to API once data is set
     useEffect(() => {
         // this effect hook should hit the api
-        console.log(props.methodType)
         if (data[tempKey]) {
             switch (props.methodType) {
                 case "PUT":

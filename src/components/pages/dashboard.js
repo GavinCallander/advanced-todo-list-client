@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
-import { ListDisplay } from '../../helpers';
+import { ListDisplay } from '../helpers';
 
-import { LIST } from '../../../constants/routes';
+import { LIST } from '../../constants/routes';
 
 export default function DashboardPage(props) {
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import { ListItem, ListSection } from '../../helpers';
+import { ListItem, ListSection } from '../helpers';
 
 export default function ListPage( props ) {
 

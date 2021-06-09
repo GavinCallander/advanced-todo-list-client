@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { AuthButton } from '../../helpers';
+import { AuthButton } from '../helpers';
 
-import { DASHBOARD } from '../../../constants/routes';
+import { DASHBOARD } from '../../constants/routes';
 
 export default function HomePage(props) {
 
