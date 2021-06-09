@@ -1,9 +1,17 @@
 import { AuthButton, AuthWrapper } from './Auth';
-import { ListDisplay, ListItem, ListSection } from './List';
+import { ListItem, ListSection } from './List';
+
+import { 
+    DashListDisplay, 
+    ItemDisplay, 
+    ListDisplay, 
+    SectionDisplay 
+} from './displays';
 
 export { 
     AuthButton,
     AuthWrapper,
+    DashListDisplay,
     ListDisplay,
     ListItem,
     ListSection,

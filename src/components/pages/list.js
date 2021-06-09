@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import { ListItem, ListSection } from '../helpers';
+import { ListDisplay, ListSection } from '../helpers';
+
+import { getRoute } from '../../modules/api';
 
 export default function ListPage( props ) {
 
@@ -69,8 +71,11 @@ export default function ListPage( props ) {
     return (
         <div className="page">
             <p className="">{name}</p>
+            <ListDisplay 
+                listData={listData}
+            />
             <div className="list">
-                {sectionsDisplay}
+                {/* {sectionsDisplay} */}
             </div>
             <Link to="/dashboard">Dashboard</Link>
         </div>

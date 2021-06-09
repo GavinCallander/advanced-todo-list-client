@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 
+import { DashListMenu } from '../menus';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 
 import { LIST } from '../../../constants/routes';
 
-export default function ListDisplay(props) {
+export default function DashListDisplay(props) {
 
     const { id, name, progress } = props;
 
@@ -17,3 +19,10 @@ export default function ListDisplay(props) {
         </Link>
     )
 };
+
+/*
+    ToDo: What is needed from this component?
+            *   Trigger for quickmenu on Ellipsis icon
+            *   Link attached to list name and not the entire component
+            *   Completion bar along the bottom for easy visualization
+*/

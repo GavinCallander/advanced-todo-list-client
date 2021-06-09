@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
-import { ListDisplay } from '../helpers';
+import { DashListDisplay } from '../helpers';
 
 import { LIST } from '../../constants/routes';
 
@@ -27,7 +27,7 @@ export default function DashboardPage(props) {
     }, [props.user]);
 
     let listsDisplay = lists.map(list => {
-        return <ListDisplay 
+        return <DashListDisplay 
                     key={list._id}
                     id={list._id}
                     name={list.name} 

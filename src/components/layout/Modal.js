@@ -25,7 +25,7 @@ export default function Modal(props) {
     */
 
     const createInputsAndObject = (method, modal, userData) => {
-        console.log("Dealing with inputs and object");
+        // console.log("Dealing with inputs and object");
         let tempObj;
         if (userData) { 
             tempObj = userData;
@@ -37,8 +37,7 @@ export default function Modal(props) {
                 };
             };
         } else {
-            console.log(props.userData)
-            console.log("WTF?")
+            // console.log(props.userData)
         }
         for (let key in DATA[method][modal]) {
             tempObj[key] = DATA[method][modal][key];
@@ -70,9 +69,7 @@ export default function Modal(props) {
         if (name !== "name") {
             tempObj.item_fields.forEach(field => {
                 if (field.name === name) {
-                    console.log("Woohoo, we have " + name);
                     field.value = e.target.value;
-                    console.log(field.value);
                 }
             })
         } else {
@@ -101,12 +98,12 @@ export default function Modal(props) {
 
     // handles form flow and data storage for specific modal
     useEffect(() => {
-        console.log("componentDidUpdate")
+        // console.log("componentDidUpdate")
         let method = props.methodType;
         let modal = props.modalType;
         switch (method) {
             case 'POST':
-                console.log("POST");
+                // console.log("POST");
                 switch (modal) {
                     case 'LIST':
                         setFormPage(1);
@@ -118,7 +115,7 @@ export default function Modal(props) {
                 }
                 break;
             case 'PUT':
-                console.log("PUT")
+                // console.log("PUT")
                 switch (modal) {
                     default:
                         createInputsAndObject(method, modal, props.userData);
@@ -137,7 +134,6 @@ export default function Modal(props) {
         if (data[tempKey]) {
             switch (props.methodType) {
                 case "PUT":
-                    console.log("Updating")
                     METHODS.putRequest(options);
                     // props.setModalActive(false);
                     break;
