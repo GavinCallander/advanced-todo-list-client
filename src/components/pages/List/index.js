@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import { ListItem, ListItemModal, ListSection } from '../../helpers';
+import { ListItem, ListSection } from '../../helpers';
 
 export default function ListPage( props ) {
 
@@ -80,13 +80,6 @@ export default function ListPage( props ) {
 
     return (
         <div className="page">
-            {/* <ListItemModal 
-                className={className}
-                itemFields={listData.itemFields}
-                listId={listId}
-                sectionId={sectionId}
-                setModalOpen={setModalOpen}
-            /> */}
             <p className="">{name}</p>
             <div className="list">
                 {sectionsDisplay}
