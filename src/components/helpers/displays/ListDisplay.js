@@ -41,3 +41,13 @@ export default function ListDisplay(props) {
         </div>
     )
 };
+
+/*
+    ToDo:   What is needed from this component?
+            *   Structure for child components
+                *   specifically sections; what happens to other sections if one expands?
+
+    ToDo:   Secondary Tasks
+            *   Tidy up SectionDisplay imports
+                *   ensure changes are done simultaneously to avoid bugs
+*/

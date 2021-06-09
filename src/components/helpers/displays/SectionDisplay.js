@@ -9,8 +9,6 @@ export default function SectionDisplay(props) {
     
     const [sectionActive, setSectionActive] = useState(false);
 
-    console.log(props);
-
     const handleModalOpen = () => {
         let tempObj = props.userData;
         tempObj.section_id = props.sectionId;
@@ -43,15 +41,6 @@ export default function SectionDisplay(props) {
         }):
         <div className=""></div>
 
-    // let header = sectionActive ? 
-    //     <div className="list__section__header">
-    //         <p className="content content--one">
-
-    //         </p>
-    //     </div>
-
-    // console.log(className);
-
     return (
         <div className={className}>
             {header}
@@ -59,3 +48,10 @@ export default function SectionDisplay(props) {
         </div>
     )
 };
+
+/* 
+    ToDo:   What is needed from this component?
+            *   Smooth transition from inactive to active
+                *   optimize transition
+                *   display content smoothly, as opposed to immediately upon open
+*/

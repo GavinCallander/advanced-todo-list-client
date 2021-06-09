@@ -12,16 +12,19 @@ export default function DashListDisplay(props) {
     const { id, name, progress } = props;
 
     return (
-        <Link className="list-display" to={`${LIST}/${id}`}>
-            <FontAwesomeIcon icon={faEllipsisV} size="2x" />
-            <p className="">{name}</p>
+        <div className="list-display">
+            <FontAwesomeIcon icon={faEllipsisV} size="1x" />
+            <Link className="" to={`${LIST}/${id}`}>
+                <p className="">{name}</p>
+            </Link>
             <p className="">{progress}</p>
-        </Link>
+        </div>
+
     )
 };
 
 /*
-    ToDo: What is needed from this component?
+    ToDo:   What is needed from this component?
             *   Trigger for quickmenu on Ellipsis icon
             *   Link attached to list name and not the entire component
             *   Completion bar along the bottom for easy visualization

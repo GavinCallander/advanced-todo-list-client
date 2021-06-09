@@ -18,3 +18,9 @@ export default function Header(props) {
         </div>
     )
 };
+
+/* 
+    ToDo:   What is needed from this component?
+            *   Hamburger needs to work
+                *   does this mean another menu component?
+*/
