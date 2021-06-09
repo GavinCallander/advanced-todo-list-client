@@ -59,19 +59,7 @@ export default function ListPage( props ) {
                         userData={props.userData}
                     />
         }):
-        null
-
-
-    // let sectionsDisplay = listData && sections ?
-    //     sections.map(section => {
-    //         section.length ? 
-    //             items = sections.listItems.map(listItem => {
-    //                 return <ListItem name={listItem} />
-    //             }):
-    //             items = <ListItem name="Thing" />
-    //             return<ListSection key={section._id} setModalOpen={setModalOpen} sectionId={section._id} setSectionId={setSectionId} name={section.name}></ListSection>
-    //             }):
-    //             null;
+        null;
 
     /*
         ToDo: Complete Section display
