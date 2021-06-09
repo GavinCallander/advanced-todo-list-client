@@ -1,5 +1,4 @@
 import { AuthButton, AuthWrapper } from './Auth';
-import { ListItem, ListSection } from './List';
 
 import { 
     DashListDisplay, 
@@ -13,6 +12,4 @@ export {
     AuthWrapper,
     DashListDisplay,
     ListDisplay,
-    ListItem,
-    ListSection,
 };

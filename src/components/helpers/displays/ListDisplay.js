@@ -13,7 +13,6 @@ export default function ListDisplay(props) {
             let items = [];
             props.listData.list_items.map(item => {
                 if (item.section._id == section._id) {
-                    console.log(item._id, section._id, "good")
                     items.push(item);
                 }
                 else {
@@ -24,6 +23,14 @@ export default function ListDisplay(props) {
                         items={items}
                         key={section}
                         listData={props.listData}
+                        name={section.name}
+                        setMethodType={props.setMethodType}
+                        setModalActive={props.setModalActive}
+                        setModalType={props.setModalType}
+                        setRoute={props.setRoute}
+                        sectionId={section._id}
+                        setUserData={props.setUserData}
+                        userData={props.userData}
                     />
             }): 
             null;

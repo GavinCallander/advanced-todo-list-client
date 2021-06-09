@@ -43,7 +43,14 @@ export default function SectionDisplay(props) {
         }):
         <div className=""></div>
 
-    console.log(className);
+    // let header = sectionActive ? 
+    //     <div className="list__section__header">
+    //         <p className="content content--one">
+
+    //         </p>
+    //     </div>
+
+    // console.log(className);
 
     return (
         <div className={className}>

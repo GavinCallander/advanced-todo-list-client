@@ -1,5 +1,7 @@
-export default function ItemDisplay() {
+export default function ItemDisplay(props) {
     return (
-        <div></div>
+        <div className="">
+            <p className="">{props.name}</p>
+        </div>
     )
 };
