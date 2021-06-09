@@ -1,5 +1,9 @@
-import { AuthButton, AuthWrapper } from './Auth';
-
+import {
+    AuthWrapper
+} from './auth';
+import {
+    AuthButton
+} from './buttons';
 import { 
     DashListDisplay, 
     ItemDisplay, 
