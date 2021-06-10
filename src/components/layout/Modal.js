@@ -42,7 +42,13 @@ export default function Modal(props) {
         <div className={modalClassName}>
             A modal
             {
-                totalFormPages > 0 ? <MultiPageForm /> : <SinglePageForm />
+                totalFormPages === 0 ? 
+                    <MultiPageForm 
+                        totalFormPages={totalFormPages}
+                    /> : 
+                    <SinglePageForm 
+                    
+                    />
             }
         </div>
     )

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import * as DATA from '../../../constants/data';
 
-export default function Form(props) {
+export default function SinglePageForm(props) {
 
     let method;
     let modal;
