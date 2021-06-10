@@ -4,23 +4,18 @@ import * as DATA from '../../../constants/data';
 
 export default function SinglePageForm(props) {
 
-    let method;
-    let modal;
-
     useEffect(() => {
-        method = props.methodType;
-        modal = props.modalType;
+        console.log("SinglePageForm: componentDidMount");
+    }, []);
+    useEffect(() => {
+        console.log("SinglePageForm: componentDidUpdate: props");
     }, [props]);
 
     let className;
 
-
-
     return (
         <form className={className}>
-            <h2>A Form</h2>
-            <button onClick={() => console.log(method)} type="button">Method</button>
-            <button onClick={() => console.log(modal)} type="button">Modal</button>
+            A single page form
         </form>
     )
 };

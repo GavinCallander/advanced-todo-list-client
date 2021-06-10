@@ -76,17 +76,21 @@ export default function App() {
     
     return (
         <div className="app">
-            <Modal 
-                // handleAuth={handleAuth}
-                methodType={methodType}
-                modalActive={modalActive}
-                modalType={modalType}
-                // route={route}
-                // setModalActive={setModalActive}
-                // setUser={setUser}
-                // user={user}
-                // userData={userData}
-            />
+            {
+                modalActive ? 
+                    <Modal 
+                        // handleAuth={handleAuth}
+                        methodType={methodType}
+                        modalActive={modalActive}
+                        modalType={modalType}
+                        // route={route}
+                        // setModalActive={setModalActive}
+                        // setUser={setUser}
+                        // user={user}
+                        // userData={userData}
+                    /> :
+                    null
+            }
             <Header user={user} />
             <Switch>
                 {/* Maybe separate into separate utils file */}

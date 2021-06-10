@@ -22,12 +22,11 @@ ToDo:   Order of operations for MultiPageForm:
 
 //  LIFE CYCLE EVENTS
     useEffect(() => {
-        // console.log("MultiPageForm: componentDidMount");
+        console.log("MultiPageForm: componentDidMount");
     }, []);
     // STORING INPUT FIELDS PASSED IN AS PROPS
     useEffect(() => {
-        // console.log("MultiPageForm: componentDidUpdate: saving inputs");
-        console.log(props);
+        console.log("MultiPageForm: componentDidUpdate: saving inputs");
         // saveInputs();
     }, [props]);
 
@@ -43,11 +42,8 @@ ToDo:   Order of operations for MultiPageForm:
 
     return (
         <div className="">
+            A multi page form
             <p className="">{currentPage}</p>
-            <FormNav 
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-            />
         </div>
     )
 };

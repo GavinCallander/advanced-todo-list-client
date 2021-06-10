@@ -5,8 +5,8 @@ import { SinglePageForm, MultiPageForm } from '../helpers';
 import * as DATA from '../../constants/data';
 
 export default function Modal(props) {
-
-    const [totalFormPages, setTotalFormPages] = useState(0);
+//  COMPONENT STATE
+    const [totalFormPages, setTotalFormPages] = useState(null);
 
 //  LIFECYCLE EFFECTS
     useEffect(() => {
@@ -25,7 +25,7 @@ export default function Modal(props) {
 
 // METHODS
     const checkFormType = (methodType, modalType) => {
-        let count = 0;
+        let count = 1;
         let data = DATA[methodType][modalType];
         for (let key in data) {
             if (Array.isArray(data[key])) {
@@ -42,21 +42,16 @@ export default function Modal(props) {
         <div className={modalClassName}>
             A modal
             {
-                totalFormPages === 0 ? 
-                    <MultiPageForm 
-                        totalFormPages={totalFormPages}
-                    /> : 
-                    <SinglePageForm 
-                    
-                    />
+                totalFormPages < 1 ?
+                    null :
+                        totalFormPages > 1 ?
+                            <MultiPageForm 
+
+                            /> :
+                            <SinglePageForm 
+
+                            />
             }
         </div>
     )
 };
-
-/*
-    ToDo:   What is needed from this component?
-        *   to be a display with greater hierarchical importance than the rest of the app
-        *   to render what is required of it
-            *   at this moment, pretty much just forms
-*/
