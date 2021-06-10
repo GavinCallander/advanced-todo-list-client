@@ -58,10 +58,6 @@ export default function App() {
     useEffect(() => {
         decodeToken();
     }, []);
-
-    useEffect(() => {
-        // console.log(userData);
-    }, [userData])
     
     return (
         <div className="app">
@@ -89,9 +85,6 @@ export default function App() {
                         user={user}
                     />
                 } />
-                {/* Auth wrapper checks for authentication by looking for token in local storage */}
-                {/* Will be checking against current user as well at App.js */}
-                {/* THIS IS A BIG TODO */}
                 <AuthWrapper user={user}>
                     <Route 
                         path={ROUTES.DASHBOARD} 

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { DashListMenu } from '../menus';
@@ -9,11 +10,20 @@ import { LIST } from '../../../constants/routes';
 
 export default function DashListDisplay(props) {
 
+    const [menuActive, setMenuActive] = useState(false);
+
     const { id, name, progress } = props;
 
     return (
         <div className="list-display">
-            <FontAwesomeIcon icon={faEllipsisV} size="1x" />
+            <DashListMenu
+                menuActive={menuActive}
+            />
+            <FontAwesomeIcon 
+                icon={faEllipsisV} 
+                onClick={() => setMenuActive(!menuActive)} 
+                size="1x" 
+            />
             <Link className="" to={`${LIST}/${id}`}>
                 <p className="">{name}</p>
             </Link>

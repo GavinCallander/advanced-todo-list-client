@@ -9,7 +9,6 @@ export default function Modal(props) {
     const [data, setData] = useState({});
     const [formPage, setFormPage] = useState(0);
     const [inputFields, setInputFields] = useState([]);
-    const [tempKey, setTempKey] = useState("");
     const [tempData, setTempData] = useState({});
     const [tempVal, setTempVal] = useState("");
     
@@ -80,7 +79,6 @@ export default function Modal(props) {
         } else {
             tempObj[name] = e.target.value;
         }
-        console.log(tempObj[name]);
         setTempData(tempObj);
     };
 
@@ -134,8 +132,6 @@ export default function Modal(props) {
     }, [DATA, props]);
     // posts to API once data is set
     useEffect(() => {
-        console.log("data changed")
-        console.log(props.methodType);
         // this effect hook should hit the api
         switch (props.methodType) {
             case "PUT":
@@ -148,10 +144,9 @@ export default function Modal(props) {
                 METHODS.postRequest(options);
                 break;
             default:
-                console.log("Nothing?")
                 break;
-        props.setModalActive(false);
-        }
+            }
+            props.setModalActive(false);
     }, [data]);
 
     // Form submit

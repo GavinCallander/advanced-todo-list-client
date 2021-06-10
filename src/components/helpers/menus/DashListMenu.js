@@ -1,6 +1,12 @@
-export default function DashListMenu() {
+export default function DashListMenu(props) {
+
+    let className = props.menuActive ? "menu-list-dash menu-list-dash--active" : "menu-list-dash";
+
     return (
-        <div></div>
+        <ul className={className}>
+            <li className="">A menu item</li>
+            <li className="">And another</li>
+        </ul>
     )
 };
 

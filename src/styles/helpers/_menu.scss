@@ -1,0 +1,18 @@
+.menu {
+    &-list {
+        &-dash {
+            position: absolute;
+            display: none;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            width: 30%;
+            min-height: 10%;
+            background-color: white;
+            border: 1px solid black;
+            &--active {
+                display: flex;
+            }
+        }
+    }
+}
