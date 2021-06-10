@@ -1,9 +1,11 @@
-import FormFlow from './FormFlow';
+import Form from './Form';
 import FormInput from './FormInput';
 import FormNav from './FormNav';
+import MultiPageForm from './MultiPageForm';
 
 export {
-    FormFlow,
+    Form,
     FormInput,
-    FormNav
+    FormNav,
+    MultiPageForm
 };

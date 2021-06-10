@@ -13,9 +13,10 @@ import {
 } from './displays';
 // form components
 import {
-    FormFlow,
+    Form,
     FormInput,
-    FormNav
+    FormNav,
+    MultiPageForm
 } from './forms';
 // toolbar components
 import {
@@ -28,9 +29,10 @@ export {
     AuthWrapper,
     DashListDisplay,
     DashToolbar,
-    FormFlow,
+    Form,
     FormInput,
     FormNav,
     ListDisplay,
-    ListToolbar
+    ListToolbar,
+    MultiPageForm
 };

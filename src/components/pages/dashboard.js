@@ -12,6 +12,10 @@ export default function DashboardPage(props) {
     const [redirect, setRedirect] = useState(false);
     const [route, setRoute] = useState("");
 
+    // useEffect(() => {
+    //     console.log(lists);
+    // }, [lists])
+
     const fetchLists = () => {
         axios.get(`${process.env.REACT_APP_SERVER_URL}/lists`)
         .then(response => {

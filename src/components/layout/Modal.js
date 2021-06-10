@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { FormFlow } from '../helpers';
+import { Form, MultiPageForm } from '../helpers';
 
 import * as DATA from '../../constants/data';
 
@@ -14,6 +14,10 @@ export default function Modal(props) {
     const [inputFields, setInputFields] = useState([]);
     const [tempData, setTempData] = useState({});
     const [tempVal, setTempVal] = useState("");
+
+    useEffect(() => {
+        console.log('modal props', props);
+    }, [props]);
     
     let options = { 
         data,
@@ -22,91 +26,92 @@ export default function Modal(props) {
     };
     let tempFields = [];
 
-    /*
-        ToDo: Work out if there's any difference between tempFields in a List vs Auth
-    */
+/*
+    ToDo:   Revise modal operations to see how to handle operation delegation
+            *   separation of concerns having modal not handle form inputs and instead render a form component
+*/  
 
-    const createInputsAndObject = (method, modal, userData) => {
-        console.log("Dealing with inputs and object");
-        let tempObj = {};
-        for (let key in DATA[method][modal]) {
-            tempObj[key] = DATA[method][modal][key];
-            tempFields.push(key);
-        };
-        if (userData) { 
-            tempObj = userData;
-            for (let key in userData) {
-                if (typeof(userData[key]) !== "string") {
-                    userData[key].forEach(datum => {
-                        tempFields.push(datum.name);
-                    });
-                };
-            };
-        } else {
-            console.log(props.userData)
-        }
-        setTempData(tempObj);
-    };
+    // const createInputsAndObject = (method, modal, userData) => {
+    //     console.log("Dealing with inputs and object");
+    //     let tempObj = {};
+    //     for (let key in DATA[method][modal]) {
+    //         tempObj[key] = DATA[method][modal][key];
+    //         tempFields.push(key);
+    //     };
+    //     if (userData) { 
+    //         tempObj = userData;
+    //         for (let key in userData) {
+    //             if (typeof(userData[key]) !== "string") {
+    //                 userData[key].forEach(datum => {
+    //                     tempFields.push(datum.name);
+    //                 });
+    //             };
+    //         };
+    //     } else {
+    //         console.log(props.userData)
+    //     }
+    //     setTempData(tempObj);
+    // };
 
-    const createListFormFlow = (method, modal ) => {
-        setTempData(DATA[method][modal]);
-        DATA[method][modal].owner = props.user._id;
-        for (let key in DATA[method][modal]) {
-            tempFields.push(key);
-        }
-        // console.log(DATA);
-        // console.log(DATA[method]);
-        // console.log(DATA[method][modal]);
-    };
+    // const createListFormFlow = (method, modal ) => {
+    //     setTempData(DATA[method][modal]);
+    //     DATA[method][modal].owner = props.user._id;
+    //     for (let key in DATA[method][modal]) {
+    //         tempFields.push(key);
+    //     }
+    //     // console.log(DATA);
+    //     // console.log(DATA[method]);
+    //     // console.log(DATA[method][modal]);
+    // };
 
-    useEffect(() => {
-        console.log(tempData);
-    }, [tempData]);
+    // useEffect(() => {
+    //     console.log(tempData);
+    // }, [tempData]);
     
     // did mount
     useEffect(() => {
         console.log("componentDidMount")
     }, []);
 
-    const handleInputChange = e => {
-        // console.log("Changing", e.target.getAttribute("name"));
-        console.log(tempData);
-        if (formFlow) {
-            console.log("temp val being updated")
-            setTempVal(e.target.value);
-            return;
-        }
-        // if (formPage > 1) {
-        //     setTempVal(e.target.value);
-        //     return;
-        // }
-        let name = e.target.getAttribute("name");
-        let tempObj = tempData;
-        console.log(tempObj);
-        if (tempObj.item_fields) {
-            console.log("There are item fields", tempObj.item_fields);
-            tempObj.item_fields.forEach(field => {
-                if (field.name === name) {
-                    console.log(field.name);
-                    field.value = e.target.value;
-                }
-                else {
-                    console.log("The field isn't the same");
-                    console.log(field.name, name);
-                }
-            })
-        } else {
-            tempObj[name] = e.target.value;
-        }
-        setTempData(tempObj);
-    };
+    // const handleInputChange = e => {
+    //     // console.log("Changing", e.target.getAttribute("name"));
+    //     console.log(tempData);
+    //     if (formFlow) {
+    //         console.log("temp val being updated")
+    //         setTempVal(e.target.value);
+    //         return;
+    //     }
+    //     // if (formPage > 1) {
+    //     //     setTempVal(e.target.value);
+    //     //     return;
+    //     // }
+    //     let name = e.target.getAttribute("name");
+    //     let tempObj = tempData;
+    //     console.log(tempObj);
+    //     if (tempObj.item_fields) {
+    //         console.log("There are item fields", tempObj.item_fields);
+    //         tempObj.item_fields.forEach(field => {
+    //             if (field.name === name) {
+    //                 console.log(field.name);
+    //                 field.value = e.target.value;
+    //             }
+    //             else {
+    //                 console.log("The field isn't the same");
+    //                 console.log(field.name, name);
+    //             }
+    //         })
+    //     } else {
+    //         tempObj[name] = e.target.value;
+    //     }
+    //     setTempData(tempObj);
+    // };
 
-    const addNewFieldOrSection = (type) => {
-        let tempObj = tempData;
-        tempObj[type].push({ name: tempVal });
-        setTempVal("");
-        setTempData(tempObj);
-    };
+    // const addNewFieldOrSection = (type) => {
+    //     let tempObj = tempData;
+    //     tempObj[type].push({ name: tempVal });
+    //     setTempVal("");
+    //     setTempData(tempObj);
+    // };
 
     // const handleChange = e => {
     //     let name = e.target.getAttribute("name");
@@ -119,65 +124,65 @@ export default function Modal(props) {
     // };
 
     // handles form flow and data storage for specific modal
-    useEffect(() => {
-        // console.log("componentDidUpdate")
-        let method = props.methodType;
-        let modal = props.modalType;
-        switch (method) {
-            case 'POST':
-                // console.log("POST");
-                switch (modal) {
-                    case 'LIST':
-                        setFormFlow(true);
-                        // setFormPage(1);
-                        createListFormFlow(method, modal);
-                        break;
-                    default:
-                        createInputsAndObject(method, modal);
-                        break;
-                }
-                break;
-            case 'PUT':
-                // console.log("PUT")
-                switch (modal) {
-                    default:
-                        createInputsAndObject(method, modal, props.userData);
-                        break;
-                }
-                break;
-            default:
-                return;
-        };
-        setInputFields(tempFields);
-    }, [DATA, props]);
+    // useEffect(() => {
+    //     // console.log("componentDidUpdate")
+    //     let method = props.methodType;
+    //     let modal = props.modalType;
+    //     switch (method) {
+    //         case 'POST':
+    //             // console.log("POST");
+    //             switch (modal) {
+    //                 case 'LIST':
+    //                     setFormFlow(true);
+    //                     // setFormPage(1);
+    //                     createListFormFlow(method, modal);
+    //                     break;
+    //                 default:
+    //                     createInputsAndObject(method, modal);
+    //                     break;
+    //             }
+    //             break;
+    //         case 'PUT':
+    //             // console.log("PUT")
+    //             switch (modal) {
+    //                 default:
+    //                     createInputsAndObject(method, modal, props.userData);
+    //                     break;
+    //             }
+    //             break;
+    //         default:
+    //             return;
+    //     };
+    //     setInputFields(tempFields);
+    // }, [DATA, props]);
     // posts to API once data is set
-    useEffect(() => {
-        // this effect hook should hit the api
-        switch (props.methodType) {
-            case "PUT":
-                console.log("Put")
-                METHODS.putRequest(options);
-                // props.setModalActive(false);
-                break;
-            case "POST":
-                console.log("Posting")
-                METHODS.postRequest(options);
-                break;
-            default:
-                break;
-            }
-            props.setModalActive(false);
-    }, [data]);
+    // useEffect(() => {
+    //     // this effect hook should hit the api
+    //     switch (props.methodType) {
+    //         case "PUT":
+    //             console.log("Put")
+    //             METHODS.putRequest(options);
+    //             // props.setModalActive(false);
+    //             break;
+    //         case "POST":
+    //             console.log("Posting")
+    //             METHODS.postRequest(options);
+    //             break;
+    //         default:
+    //             break;
+    //         }
+    //         props.setModalActive(false);
+    // }, [data]);
 
     // Form submit
-    const submitForm = (e) => {
-        e.preventDefault();
-        setData(tempData);
-    };
+    // const submitForm = (e) => {
+    //     e.preventDefault();
+    //     // setData(tempData);
+    // };
     
     // classNames and ids
     let modalClassName = props.modalActive ? "modal modal--active" : "modal";
-    let btnClassName = formFlow ? "modal__nav__btn modal__nav__btn--active" : "modal__nav__btn";
+    // let btnClassName = formFlow ? "modal__nav__btn modal__nav__btn--active" : "modal__nav__btn";
     
     /* 
         ToDo:   Handle the form fields situation
@@ -185,19 +190,19 @@ export default function Modal(props) {
                 *   otherwise, create inputs
     */
 
-    let inputs = formFlow ?
-        <FormFlow 
-            tempData={tempData}
-        /> :
-        inputFields.map(field => {
-            return <FormInput 
-                        handleInputChange={handleInputChange}
-                        field={field}
-                        key={field} 
-                        setTempData={setTempData}
-                        tempData={tempData} 
-                    />
-        });
+    // let inputs = formFlow ?
+    //     <FormFlow 
+    //         tempData={tempData}
+    //     /> :
+    //     inputFields.map(field => {
+    //         return <FormInput 
+    //                     handleInputChange={handleInputChange}
+    //                     field={field}
+    //                     key={field} 
+    //                     setTempData={setTempData}
+    //                     tempData={tempData} 
+    //                 />
+    //     });
 
     // // Create inputs for each type of operation
     // let inputs = formFlow ?
@@ -250,10 +255,10 @@ export default function Modal(props) {
     return (
         <div className={modalClassName}>
             <h1 onClick={() => props.setModalActive(!props.modalActive)}>A modal</h1>
-            <form className="modal__form" onSubmit={e => submitForm(e)}>
-                {inputs}
-                <div className="modal__nav">
-                    {/* cancel if pageOne */}
+            {/* <Form {...props} /> */}
+            {/* <form className="modal__form" onSubmit={e => submitForm(e)}> */}
+                {/* {inputs} */}
+                {/* <div className="modal__nav">
                     <button 
                         className={btnClassName}
                         disabled={formPage <= 1}
@@ -275,8 +280,8 @@ export default function Modal(props) {
                     >
                         Next
                     </button>
-                </div>
-            </form>
+                </div> */}
+            {/* </form> */}
         </div>
     )
 };
