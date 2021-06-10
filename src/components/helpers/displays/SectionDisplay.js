@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import ItemDisplay from './ItemDisplay';
 
@@ -9,15 +9,21 @@ export default function SectionDisplay(props) {
     
     const [sectionActive, setSectionActive] = useState(false);
 
+    let tempObj;
+
+    useEffect(() => {
+        tempObj = props.userData;
+    }, [props]);
+
     const handleModalOpen = () => {
-        let tempObj = props.userData;
-        tempObj.section_id = props.sectionId;
+        console.log(tempObj);
+        // tempObj.section_id = props.sectionId;
         props.setMethodType("PUT");
         props.setModalActive(true);
         props.setModalType("ITEM");
         props.setRoute("lists/item");
         props.setUserData(tempObj);
-    }
+    };
 
     let className = sectionActive ? "list__section list__section--active" : "list__section"; 
     let header = sectionActive ?

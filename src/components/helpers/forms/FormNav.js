@@ -1,6 +1,19 @@
-export default function FormNav() {
+import { useEffect } from 'react';
+
+export default function FormNav(props) {
+
+    useEffect(() => {
+        // console.log("FormNav: componentDidMount");
+    }, []);
+    useEffect(() => {
+        // console.log("FormNav: componentDidUpdate: props received")
+        // console.log(props);
+    }, [props])
+
     return (
-        <div></div>
+        <div className="">
+
+        </div>
     )
 };
 

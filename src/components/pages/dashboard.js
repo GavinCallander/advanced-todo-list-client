@@ -44,6 +44,7 @@ export default function DashboardPage(props) {
     }
 
     const handleClick = () => {
+        props.setFormPages(3);
         props.setMethodType("POST");
         props.setModalActive(true);
         props.setModalType("LIST");

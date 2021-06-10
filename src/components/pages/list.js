@@ -43,8 +43,14 @@ export default function ListPage( props ) {
     return (
         <div className="page">
             <p className="">{listData.name}</p>
-            <ListDisplay 
+            <ListDisplay
                 listData={listData}
+                setMethodType={props.setMethodType}
+                setModalActive={props.setModalActive}
+                setModalType={props.setModalType}
+                setRoute={props.setRoute}
+                setUserData={props.setUserData}
+                UserData={props.userData}
             />
             <Link to="/dashboard">Dashboard</Link>
         </div>

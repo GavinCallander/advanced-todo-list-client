@@ -14,11 +14,11 @@ export default function Modal(props) {
     const [inputFields, setInputFields] = useState([]);
     const [tempData, setTempData] = useState({});
     const [tempVal, setTempVal] = useState("");
-
-    useEffect(() => {
-        console.log('modal props', props);
-    }, [props]);
     
+    let propsObj = {
+        method: props.methodType,
+        modal: props.modalType
+    }
     let options = { 
         data,
         route: props.route,
@@ -27,9 +27,21 @@ export default function Modal(props) {
     let tempFields = [];
 
 /*
-    ToDo:   Revise modal operations to see how to handle operation delegation
-            *   separation of concerns having modal not handle form inputs and instead render a form component
+    ToDo:   Revise modal flow and render specific forms as needed
+        *   Having modal handling forms as part of component workload makes no sense
+        *   Having separate forms to render dependent on need does
 */  
+
+/*
+    ToDo:   Order of operations
+        *   modal opens and is passed props
+        *   modal renders form component based on type
+        *   modal job completed
+*/
+
+    useEffect(() => {
+        console.log("componentDidMount");
+    }, []);
 
     // const createInputsAndObject = (method, modal, userData) => {
     //     console.log("Dealing with inputs and object");
@@ -67,11 +79,6 @@ export default function Modal(props) {
     // useEffect(() => {
     //     console.log(tempData);
     // }, [tempData]);
-    
-    // did mount
-    useEffect(() => {
-        console.log("componentDidMount")
-    }, []);
 
     // const handleInputChange = e => {
     //     // console.log("Changing", e.target.getAttribute("name"));
@@ -255,6 +262,14 @@ export default function Modal(props) {
     return (
         <div className={modalClassName}>
             <h1 onClick={() => props.setModalActive(!props.modalActive)}>A modal</h1>
+            { 
+                props.formType === 0 ? 
+                    <Form {...props} /> : 
+                    <MultiPageForm 
+                        propsObj={propsObj}
+                        {...props} 
+                    /> 
+            }
             {/* <Form {...props} /> */}
             {/* <form className="modal__form" onSubmit={e => submitForm(e)}> */}
                 {/* {inputs} */}
