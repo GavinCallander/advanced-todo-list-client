@@ -15,7 +15,22 @@ import './styles/main.scss';
 import * as ROUTES from './constants/routes';
 
 export default function App() {
-    
+
+/*
+    ToDo:   Outline App-held state requirements for each child component
+        *   Helpers
+            *   AuthWrapper
+                *   user
+        *   Pages
+            *   Dashboard
+            *   Home
+            *   List
+        *   Layout
+            *   Header
+                *   user
+            *   Modal
+                *   methodType; modalActive; modalType; route
+*/
     const [methodType, setMethodType] = useState("");
     const [modalActive, setModalActive] = useState(false);
     const [modalType, setModalType] = useState("");
@@ -62,15 +77,15 @@ export default function App() {
     return (
         <div className="app">
             <Modal 
-                handleAuth={handleAuth}
+                // handleAuth={handleAuth}
                 methodType={methodType}
                 modalActive={modalActive}
                 modalType={modalType}
-                route={route}
-                setModalActive={setModalActive}
-                setUser={setUser}
-                user={user}
-                userData={userData}
+                // route={route}
+                // setModalActive={setModalActive}
+                // setUser={setUser}
+                // user={user}
+                // userData={userData}
             />
             <Header user={user} />
             <Switch>

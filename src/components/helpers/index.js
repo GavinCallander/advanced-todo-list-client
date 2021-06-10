@@ -13,7 +13,7 @@ import {
 } from './displays';
 // form components
 import {
-    Form,
+    SinglePageForm,
     FormInput,
     FormNav,
     MultiPageForm
@@ -29,7 +29,7 @@ export {
     AuthWrapper,
     DashListDisplay,
     DashToolbar,
-    Form,
+    SinglePageForm,
     FormInput,
     FormNav,
     ListDisplay,
