@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import { FormFlow } from '../helpers';
+
 import * as DATA from '../../constants/data';
 
 import * as METHODS from '../../modules/api';
@@ -7,6 +9,7 @@ import * as METHODS from '../../modules/api';
 export default function Modal(props) {
 
     const [data, setData] = useState({});
+    const [formFlow, setFormFlow] = useState(false);
     const [formPage, setFormPage] = useState(0);
     const [inputFields, setInputFields] = useState([]);
     const [tempData, setTempData] = useState({});
@@ -27,9 +30,6 @@ export default function Modal(props) {
         console.log("Dealing with inputs and object");
         let tempObj = {};
         for (let key in DATA[method][modal]) {
-            // console.log(tempObj);
-            // console.log(key);
-            // console.log(DATA[method][modal]);
             tempObj[key] = DATA[method][modal][key];
             tempFields.push(key);
         };
@@ -43,7 +43,7 @@ export default function Modal(props) {
                 };
             };
         } else {
-            // console.log(props.userData)
+            console.log(props.userData)
         }
         setTempData(tempObj);
     };
@@ -54,7 +54,14 @@ export default function Modal(props) {
         for (let key in DATA[method][modal]) {
             tempFields.push(key);
         }
+        // console.log(DATA);
+        // console.log(DATA[method]);
+        // console.log(DATA[method][modal]);
     };
+
+    useEffect(() => {
+        console.log(tempData);
+    }, [tempData]);
     
     // did mount
     useEffect(() => {
@@ -62,18 +69,30 @@ export default function Modal(props) {
     }, []);
 
     const handleInputChange = e => {
-        if (formPage > 1) {
+        // console.log("Changing", e.target.getAttribute("name"));
+        console.log(tempData);
+        if (formFlow) {
+            console.log("temp val being updated")
             setTempVal(e.target.value);
             return;
         }
+        // if (formPage > 1) {
+        //     setTempVal(e.target.value);
+        //     return;
+        // }
         let name = e.target.getAttribute("name");
         let tempObj = tempData;
+        console.log(tempObj);
         if (tempObj.item_fields) {
-        // if (name !== "name") {
+            console.log("There are item fields", tempObj.item_fields);
             tempObj.item_fields.forEach(field => {
                 if (field.name === name) {
                     console.log(field.name);
                     field.value = e.target.value;
+                }
+                else {
+                    console.log("The field isn't the same");
+                    console.log(field.name, name);
                 }
             })
         } else {
@@ -109,7 +128,8 @@ export default function Modal(props) {
                 // console.log("POST");
                 switch (modal) {
                     case 'LIST':
-                        setFormPage(1);
+                        setFormFlow(true);
+                        // setFormPage(1);
                         createListFormFlow(method, modal);
                         break;
                     default:
@@ -152,60 +172,80 @@ export default function Modal(props) {
     // Form submit
     const submitForm = (e) => {
         e.preventDefault();
-        console.log("Submitting")
         setData(tempData);
     };
     
     // classNames and ids
     let modalClassName = props.modalActive ? "modal modal--active" : "modal";
-    let btnClassName = formPage !== 0 ? "modal__nav__btn modal__nav__btn--active" : "modal__nav__btn";
+    let btnClassName = formFlow ? "modal__nav__btn modal__nav__btn--active" : "modal__nav__btn";
     
-    // Create inputs for each type of operation
-    let inputs = formPage === 0 ?
-        /*
-            *   forms without arrays involved in passing data
-            *   this part is complete for the time being
-        */
+    /* 
+        ToDo:   Handle the form fields situation
+                *   if formFlow exists, return FormFlow component
+                *   otherwise, create inputs
+    */
 
+    let inputs = formFlow ?
+        <FormFlow 
+            tempData={tempData}
+        /> :
         inputFields.map(field => {
             return <FormInput 
                         handleInputChange={handleInputChange}
-                        key={field} field={field}
+                        field={field}
+                        key={field} 
                         setTempData={setTempData}
                         tempData={tempData} 
                     />
-        }) :
-        formPage === 1 ?
-            /*
-                *   This needs to be refactored into its own component
-            */
-            // name page of list form
-            <span className="">
-                <FormInput 
-                    field={inputFields[formPage - 1]} 
-                    setTempData={setTempData} 
-                    tempData={tempData} 
-                    handleInputChange={handleInputChange}
-                />
-            </span>:
-            // sections or fields of list form
-            <span className="">
-                <FormInput 
-                    field={inputFields[formPage - 1]} 
-                    handleInputChange={handleInputChange}
-                    setTempData={setTempData} 
-                    setTempVal={setTempVal}
-                    tempData={tempData}
-                    value={tempVal}
-                />
-                <button 
-                    className=""
-                    onClick={() => addNewFieldOrSection(inputFields[formPage - 1])}
-                    type="button"
-                >
-                    Add
-                </button>
-            </span>
+        });
+
+    // // Create inputs for each type of operation
+    // let inputs = formFlow ?
+    //     /*
+    //         *   forms without arrays involved in passing data
+    //         *   this part is complete for the time being
+    //     */
+
+    //     inputFields.map(field => {
+    //         return <FormInput 
+    //                     handleInputChange={handleInputChange}
+    //                     field={field}
+    //                     key={field} 
+    //                     setTempData={setTempData}
+    //                     tempData={tempData} 
+    //                 />
+    //     }) :
+    //     formFlow ?
+    //         /*
+    //             *   This needs to be refactored into its own component
+    //         */
+    //         // name page of list form
+    //         <span className="">
+    //             <FormInput 
+    //                 field={inputFields[formPage - 1]} 
+    //                 setTempData={setTempData} 
+    //                 tempData={tempData} 
+    //                 handleInputChange={handleInputChange}
+    //             />
+    //         </span> :
+    //         // sections or fields of list form
+    //         <span className="">
+    //             <FormInput 
+    //                 field={inputFields[formPage - 1]} 
+    //                 handleInputChange={handleInputChange}
+    //                 setTempData={setTempData} 
+    //                 setTempVal={setTempVal}
+    //                 tempData={tempData}
+    //                 value={tempVal}
+    //             />
+    //             <button 
+    //                 className=""
+    //                 onClick={() => addNewFieldOrSection(inputFields[formPage - 1])}
+    //                 type="button"
+    //             >
+    //                 Add
+    //             </button>
+    //         </span>
     
     return (
         <div className={modalClassName}>

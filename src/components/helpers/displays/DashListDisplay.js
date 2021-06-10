@@ -26,13 +26,20 @@ export default function DashListDisplay(props) {
             />
             <Link className="" to={`${LIST}/${id}`}>
                 <p className="">{name}</p>
-            </Link>
+            </Link>  
             <p className="">{progress}</p>
         </div>
 
     )
 };
-
+/*
+    ToDo:   The above progress <p></p> should be redone with data viz, either as:
+            *   a ring to be completed (a la Apple)
+            *   a progress bar along the bottom of the component
+                *   this may offer a subtler solution, speak with Chelsey/Chad and see what the UX viewpoint on each is
+                *   if process bar is the chosen one, display collaborators viz in its place
+                    *   if only the owner, just show the owners avatar/initials/pic(v2)
+*/
 /*
     ToDo:   What is needed from this component?
             *   Trigger for quickmenu on Ellipsis icon
