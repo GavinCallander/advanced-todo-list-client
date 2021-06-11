@@ -5,6 +5,14 @@ import { SinglePageForm, MultiPageForm } from '../helpers';
 import * as DATA from '../../constants/data';
 
 export default function Modal(props) {
+
+/*
+    ToDo:   How should Modal handle fields like owner on the list model?
+        *   if (owner) for fields seems a bit hard-code(ish)? temporary solution, though
+        *   
+*/
+
+
 //  COMPONENT STATE
     const [data, setData] = useState({});
     const [totalFormPages, setTotalFormPages] = useState(0);
@@ -21,6 +29,9 @@ export default function Modal(props) {
     useEffect(() => {
         console.log("Modal: componentDidUpdate: totalFormPages");
     }, [totalFormPages]);
+    useEffect(() => {
+        // console.log(data);
+    }, [data]);
 
 // METHODS
     const checkFormType = (method, modalType) => {
@@ -43,10 +54,12 @@ export default function Modal(props) {
             {
                 totalFormPages < 1 ?
                     <SinglePageForm 
-                    {...props}
+                        setData={setData}
+                        {...props}
                     /> :
                     totalFormPages > 1 ?
                         <MultiPageForm 
+                            setData={setData}
                             totalFormPages={totalFormPages}
                             {...props}
                         /> :

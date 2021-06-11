@@ -14,6 +14,7 @@ export default function FormInput(props) {
 
 //  STATE
     const [label, setLabel] = useState("");
+    const [value, setValue] = useState(null);
 
 //  LIFECYCLE EVENTS
     useEffect(() => {
@@ -21,23 +22,36 @@ export default function FormInput(props) {
     }, []);
     useEffect(() => {
         console.log("FormInput: componentDidUpdate: props")
-        handleLabel(props.name);
+        // handleLabel(props.name);
+        // initializeValue();
     }, [props]);
 
 //  METHODS
+    const handleInputChange = e => {
+        console.log(e.target.value);
+    };
     const handleLabel = name => {
+        console.log(typeof(name));
         let tempArr = name.split("");
         let index;
         for (let i = 0; i < tempArr.length; i++) {
             if (i === 0 || tempArr[i-1] === "_") {
                 tempArr[i] = tempArr[i].toUpperCase();
-            }
+            };
             if (tempArr[i] === "_") {
                 index = i;
-            }
-        }
+            };
+        };
         tempArr[index] = " ";
         setLabel(tempArr.join(""));
+    };
+    const initializeValue = () => {
+        if (typeof(props.formData[props.name] != "string")) {
+            setValue([]);
+        }
+        else {
+            setValue("");
+        };
     };
 
     return (
@@ -46,7 +60,11 @@ export default function FormInput(props) {
                 label ?
                     <span className="">
                         <p className="">{label}:</p>
-                        <input className="" placeholder={label} type="" />
+                        <input 
+                            className="" 
+                            onChange={e => handleInputChange(e)} 
+                            placeholder={label} type="" 
+                            />
                     </span>:
                     null
             }

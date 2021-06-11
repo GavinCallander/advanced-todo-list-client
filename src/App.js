@@ -17,6 +17,8 @@ import * as ROUTES from './constants/routes';
 export default function App() {
 
 /*
+    ToDo:   Handle not having user for loading the modal?
+
     ToDo:   Outline App-held state requirements for each child component
         *   Helpers
             *   AuthWrapper
@@ -31,6 +33,7 @@ export default function App() {
             *   Modal
                 *   methodType; modalActive; modalType; route
 */
+// STATE
     const [method, setMethod] = useState("");
     const [modalActive, setModalActive] = useState(false);
     const [modalType, setModalType] = useState("");
@@ -38,20 +41,13 @@ export default function App() {
     const [user, setUser] = useState(null);
     const [userData, setUserData] = useState(null);
 
-    // best practice would be to bundle what is actually needed
-    // together and pass to the modal, rather than everything
-    // can do this at each individual page
+// COMPONENT LIFECYCLE
+    useEffect(() => {
+        console.log("App: componentDidMount");
+        decodeToken();
+    }, []);
 
-    const handleAuth = user => {
-        if (user) {
-            setUser(user);
-        }
-        else {
-            setUser(null);
-            localStorage.removeItem("authToken");
-        };
-    };
-    
+// METHODS
     const decodeToken = currentToken => {
         let token = currentToken || localStorage.getItem('authToken');
         if (token) {
@@ -69,10 +65,16 @@ export default function App() {
             setUser(null);
         };
     };
-
-    useEffect(() => {
-        decodeToken();
-    }, []);
+    const handleAuth = user => {
+        if (user) {
+            setUser(user);
+        }
+        else {
+            setUser(null);
+            localStorage.removeItem("authToken");
+        };
+    };
+    
     
     return (
         <div className="app">

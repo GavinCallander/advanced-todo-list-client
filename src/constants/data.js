@@ -28,7 +28,8 @@ export const POST = {
     LIST: {
         name: "",
         sections: [],
-        item_fields: []
+        item_fields: [],
+        owner: ""
     },
     LOGIN: {
         email: "",

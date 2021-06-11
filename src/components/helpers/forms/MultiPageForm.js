@@ -19,8 +19,9 @@ ToDo:   Order of operations for MultiPageForm:
 */
 
 // STATE
-    const [inputFieldNames, setInputFieldNames] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
+    const [formData, setFormData] = useState({});
+    const [inputFieldNames, setInputFieldNames] = useState([]);
 
 //  LIFE CYCLE EVENTS
     useEffect(() => {
@@ -29,26 +30,42 @@ ToDo:   Order of operations for MultiPageForm:
     // STORING INPUT FIELDS PASSED IN AS PROPS
     useEffect(() => {
         console.log("MultiPageForm: componentDidUpdate: props");
-        setInputs();
+        setDataAndInputs();
     }, [props]);
+    useEffect(() => {
+        console.log("MultiPageForm: componentDidUpdate: formData");
+    }, [formData]);
 
 // METHODS
-    const setInputs = () => {
+    const setDataAndInputs = () => {
         let { method, modalType } = props;
+        let tempObj = DATA[method][modalType];
         let tempArr = [];
         for (let key in DATA[method][modalType]) {
+            // check every key related to data
             if (!Array.isArray(DATA[method][modalType][key])) {
+                // if it isn't of type array
                 if (!tempArr.length) {
+                    // if the array has no length
+                        // push the key as an array
+                    console.log(tempArr);
                     tempArr.push([key]);
+                    console.log(tempArr);
                 }
                 else {
-                    tempArr[0].push(key);
+                    // if the key isn't owner, push it to the array at index of 0
+                    if (!key === "owner") {
+                        tempArr[0].push(key);
+                    }
                 }
             }
             else {
+                // else just push that shit
                 tempArr.push(key);
             }
         };
+        tempObj.owner = props.userId;
+        setFormData(tempObj);
         setInputFieldNames(tempArr);
     };
 
@@ -60,8 +77,8 @@ ToDo:   Order of operations for MultiPageForm:
 let content = 
     inputFieldNames.length ?
         currentPage === 0 ?
-            inputFieldNames[0].map(name => <FormInput key={name} name={name} />):
-            <FormInput name={inputFieldNames[currentPage]} />:
+            inputFieldNames[0].map(name => <FormInput formData={formData} key={name} name={name} />):
+            <FormInput name={inputFieldNames[currentPage]} formData={formData} />:
             null;
 
     return (

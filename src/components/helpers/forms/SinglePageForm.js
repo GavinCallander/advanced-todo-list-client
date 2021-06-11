@@ -22,7 +22,9 @@ export default function SinglePageForm(props) {
         for (let key in DATA[method][modalType]) {
             if (!Array.isArray(DATA[method][modalType][key])) {
                 if (!tempArr.length) {
+                    console.log(tempArr);
                     tempArr.push([key]);
+                    console.log(tempArr);
                 }
                 else {
                     tempArr[0].push(key);
