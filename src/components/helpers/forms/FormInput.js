@@ -1,9 +1,56 @@
+import { useEffect, useState } from 'react';
+
 export default function FormInput(props) {
+
+/*
+    ToDo:   How am I handling data? 
+        *   Pass down the type from whichever form this is being rendered on?
+
+    ToDo:   Consider a better UI than an add button for array inputs?
+        *   could space down be add? 
+            *   separates out entries with a semi-colon and stores them in state?
+            *   would this need to be its own component?
+*/
+
+//  STATE
+    const [label, setLabel] = useState("");
+
+//  LIFECYCLE EVENTS
+    useEffect(() => {
+        console.log("FormInput: componentDidMount");
+    }, []);
+    useEffect(() => {
+        console.log("FormInput: componentDidUpdate: props")
+        handleLabel(props.name);
+    }, [props]);
+
+//  METHODS
+    const handleLabel = name => {
+        let tempArr = name.split("");
+        let index;
+        for (let i = 0; i < tempArr.length; i++) {
+            if (i === 0 || tempArr[i-1] === "_") {
+                tempArr[i] = tempArr[i].toUpperCase();
+            }
+            if (tempArr[i] === "_") {
+                index = i;
+            }
+        }
+        tempArr[index] = " ";
+        setLabel(tempArr.join(""));
+    };
+
     return (
-        <div>
-            {props.name}
-            <input placeholder="lame" type="text" />
-        </div>
+        <>
+            {
+                label ?
+                    <span className="">
+                        <p className="">{label}:</p>
+                        <input className="" placeholder={label} type="" />
+                    </span>:
+                    null
+            }
+        </>
     )
 };
 

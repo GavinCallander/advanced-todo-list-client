@@ -10,13 +10,15 @@ import * as METHODS from '../../../modules/api';
 export default function MultiPageForm(props) {
 
 /* 
+ToDo:   How is data being handled between form pages and inputs?
+
 ToDo:   Order of operations for MultiPageForm:
         *   component mounts
         *   component updates as it receives props, which triggers following functions
             *   storing input field names
 */
 
-// STATE VARIABLES
+// STATE
     const [inputFieldNames, setInputFieldNames] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
 
@@ -55,7 +57,6 @@ ToDo:   Order of operations for MultiPageForm:
     ToDo:   Render form content based upon the current page...
             *   For the time being, make it janky
 */
-
 let content = 
     inputFieldNames.length ?
         currentPage === 0 ?

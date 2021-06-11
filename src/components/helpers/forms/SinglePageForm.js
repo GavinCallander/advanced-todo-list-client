@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import FormInput from './FormInput';
+
 import * as DATA from '../../../constants/data';
 
 export default function SinglePageForm(props) {
@@ -11,7 +13,6 @@ export default function SinglePageForm(props) {
     }, []);
     useEffect(() => {
         console.log("SinglePageForm: componentDidUpdate: props");
-        console.log(props);
         setInputs();
     }, [props]);
 
@@ -37,6 +38,9 @@ export default function SinglePageForm(props) {
     return (
         <form className="">
             A single page form
+            {
+                inputFieldNames.map(name => <FormInput key={name} name={name} />)
+            }
         </form>
     )
 };

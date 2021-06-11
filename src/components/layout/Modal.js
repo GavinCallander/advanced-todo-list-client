@@ -6,6 +6,7 @@ import * as DATA from '../../constants/data';
 
 export default function Modal(props) {
 //  COMPONENT STATE
+    const [data, setData] = useState({});
     const [totalFormPages, setTotalFormPages] = useState(0);
 
 //  LIFECYCLE EFFECTS

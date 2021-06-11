@@ -79,15 +79,12 @@ export default function App() {
             {
                 modalActive ? 
                     <Modal 
-                        // handleAuth={handleAuth}
+                        handleAuth={handleAuth}
                         method={method}
                         modalActive={modalActive}
                         modalType={modalType}
                         route={route}
-                        // setModalActive={setModalActive}
-                        // setUser={setUser}
-                        user={user}
-                        // userData={userData}
+                        userId={user._id}
                     /> :
                     null
             }
