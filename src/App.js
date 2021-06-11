@@ -31,7 +31,7 @@ export default function App() {
             *   Modal
                 *   methodType; modalActive; modalType; route
 */
-    const [methodType, setMethodType] = useState("");
+    const [method, setMethod] = useState("");
     const [modalActive, setModalActive] = useState(false);
     const [modalType, setModalType] = useState("");
     const [route, setRoute] = useState("");
@@ -80,13 +80,13 @@ export default function App() {
                 modalActive ? 
                     <Modal 
                         // handleAuth={handleAuth}
-                        methodType={methodType}
+                        method={method}
                         modalActive={modalActive}
                         modalType={modalType}
-                        // route={route}
+                        route={route}
                         // setModalActive={setModalActive}
                         // setUser={setUser}
-                        // user={user}
+                        user={user}
                         // userData={userData}
                     /> :
                     null
@@ -97,7 +97,7 @@ export default function App() {
                 <Route exact path={ROUTES.HOME} render={() =>
                     <HomePage
                         handleAuth={handleAuth}
-                        setMethodType={setMethodType}
+                        setMethod={setMethod}
                         setModalActive={setModalActive}
                         setModalType={setModalType}
                         setRoute={setRoute}
@@ -109,7 +109,7 @@ export default function App() {
                         path={ROUTES.DASHBOARD} 
                         render={() => 
                         <DashboardPage 
-                            setMethodType={setMethodType}
+                            setMethod={setMethod}
                             setModalActive={setModalActive}
                             setModalType={setModalType}
                             setRoute={setRoute}
@@ -121,7 +121,7 @@ export default function App() {
                         render={({ match }) => 
                         <ListPage
                             match={match}
-                            setMethodType={setMethodType}
+                            setMethod={setMethod}
                             setModalActive={setModalActive}
                             setModalType={setModalType}
                             setRoute={setRoute}

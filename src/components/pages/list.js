@@ -45,7 +45,7 @@ export default function ListPage( props ) {
             <p className="">{listData.name}</p>
             <ListDisplay
                 listData={listData}
-                setMethodType={props.setMethodType}
+                setMethod={props.setMethod}
                 setModalActive={props.setModalActive}
                 setModalType={props.setModalType}
                 setRoute={props.setRoute}

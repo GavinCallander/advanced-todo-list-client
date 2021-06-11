@@ -16,9 +16,8 @@ export default function SectionDisplay(props) {
     }, [props]);
 
     const handleModalOpen = () => {
-        console.log(tempObj);
         // tempObj.section_id = props.sectionId;
-        props.setMethodType("PUT");
+        props.setMethod("PUT");
         props.setModalActive(true);
         props.setModalType("ITEM");
         props.setRoute("lists/item");

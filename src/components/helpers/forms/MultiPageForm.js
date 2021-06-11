@@ -26,16 +26,21 @@ ToDo:   Order of operations for MultiPageForm:
     }, []);
     // STORING INPUT FIELDS PASSED IN AS PROPS
     useEffect(() => {
-        console.log("MultiPageForm: componentDidUpdate: saving inputs");
-        // saveInputs();
+        console.log("MultiPageForm: componentDidUpdate: props");
+        setInputs();
     }, [props]);
 
 // METHODS
-    const saveInputs = () => {
-        let { method, modal } = props.propsObj;
-        let tempArr = [];
-        for (let key in DATA[method][modal]) {
-            tempArr.push(key);
+    const setInputs = () => {
+        let { method, modalType } = props;
+        let tempArr = [[]];
+        for (let key in DATA[method][modalType]) {
+            if (!Array.isArray(DATA[method][modalType][key])) {
+                tempArr[0].push(key);
+            }
+            else {
+                tempArr.push(key);
+            }
         };
         setInputFieldNames(tempArr);
     };

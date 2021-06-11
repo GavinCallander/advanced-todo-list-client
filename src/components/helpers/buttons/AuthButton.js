@@ -2,7 +2,7 @@ export default function AuthButton(props) {
 
     function openModal() {
         if (!props.modalActive) {
-            props.setMethodType("POST")
+            props.setMethod("POST")
             props.setModalActive(true);
             props.setModalType(props.text.toUpperCase());
             props.setRoute(props.route);

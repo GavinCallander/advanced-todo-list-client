@@ -24,7 +24,7 @@ export default function ListDisplay(props) {
                         key={section}
                         listData={props.listData}
                         name={section.name}
-                        setMethodType={props.setMethodType}
+                        setMethod={props.setMethod}
                         setModalActive={props.setModalActive}
                         setModalType={props.setModalType}
                         setRoute={props.setRoute}

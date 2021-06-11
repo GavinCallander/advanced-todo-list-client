@@ -30,7 +30,7 @@ export default function HomePage(props) {
             <div className="page__section">
                 <AuthButton
                     route="auth/signup"
-                    setMethodType={props.setMethodType}
+                    setMethod={props.setMethod}
                     setModalActive={props.setModalActive}
                     setModalType={props.setModalType}
                     setRoute={props.setRoute}
@@ -39,7 +39,7 @@ export default function HomePage(props) {
                 <p className="">or</p>
                 <AuthButton
                     route="auth/login"
-                    setMethodType={props.setMethodType}
+                    setMethod={props.setMethod}
                     setModalActive={props.setModalActive}
                     setModalType={props.setModalType}
                     setRoute={props.setRoute}
