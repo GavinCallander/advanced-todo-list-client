@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import FormInput from './FormInput';
 import FormNav from './FormNav';
 
 import * as DATA from '../../../constants/data';
@@ -18,7 +19,6 @@ ToDo:   Order of operations for MultiPageForm:
 // STATE VARIABLES
     const [inputFieldNames, setInputFieldNames] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
-    const [totalPages, setTotalPages] = useState(0);
 
 //  LIFE CYCLE EVENTS
     useEffect(() => {
@@ -45,10 +45,28 @@ ToDo:   Order of operations for MultiPageForm:
         setInputFieldNames(tempArr);
     };
 
+// CONTENT
+/*
+    ToDo:   Render form content based upon the current page...
+            *   For the time being, make it janky
+*/
+
+let content = 
+    inputFieldNames.length ?
+        currentPage === 0 ?
+            inputFieldNames[0].map(name => <FormInput key={name} name={name} />):
+            <FormInput name={inputFieldNames[currentPage]} />:
+            null;
+
     return (
         <div className="">
             A multi page form
-            <p className="">{currentPage}</p>
+            {content}
+            <FormNav 
+                currentPage={currentPage} 
+                setCurrentPage={setCurrentPage}
+                {...props} 
+            />
         </div>
     )
 };

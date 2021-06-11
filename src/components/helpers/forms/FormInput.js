@@ -1,6 +1,9 @@
 export default function FormInput(props) {
     return (
-        <div></div>
+        <div>
+            {props.name}
+            <input placeholder="lame" type="text" />
+        </div>
     )
 };
 

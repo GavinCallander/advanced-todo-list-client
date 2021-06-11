@@ -6,9 +6,7 @@ import * as DATA from '../../constants/data';
 
 export default function Modal(props) {
 //  COMPONENT STATE
-
-    const [totalFormPages, setTotalFormPages] = useState(null);
-    const [formData, setFormData] = useState({});
+    const [totalFormPages, setTotalFormPages] = useState(0);
 
 //  LIFECYCLE EFFECTS
     useEffect(() => {
@@ -25,7 +23,7 @@ export default function Modal(props) {
 
 // METHODS
     const checkFormType = (method, modalType) => {
-        let count = 1;
+        let count = 0;
         let data = DATA[method][modalType];
         for (let key in data) {
             if (Array.isArray(data[key])) {
@@ -46,12 +44,12 @@ export default function Modal(props) {
                     null :
                         totalFormPages > 1 ?
                             <MultiPageForm 
+                                totalFormPages={totalFormPages}
                                 {...props}
                             /> :
                             <SinglePageForm 
-                                // needs method and modal for DATA[method][modal]
-                                // needs route for hitting the api
-                                // needs userId
+                                totalFormPages={totalFormPages}
+                                {...props}
                             />
             }
         </div>
