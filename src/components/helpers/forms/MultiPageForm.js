@@ -33,10 +33,15 @@ ToDo:   Order of operations for MultiPageForm:
 // METHODS
     const setInputs = () => {
         let { method, modalType } = props;
-        let tempArr = [[]];
+        let tempArr = [];
         for (let key in DATA[method][modalType]) {
             if (!Array.isArray(DATA[method][modalType][key])) {
-                tempArr[0].push(key);
+                if (!tempArr.length) {
+                    tempArr.push([key]);
+                }
+                else {
+                    tempArr[0].push(key);
+                }
             }
             else {
                 tempArr.push(key);

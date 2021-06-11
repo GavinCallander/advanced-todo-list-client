@@ -7,13 +7,11 @@ export default function FormNav(props) {
     }, []);
     useEffect(() => {
         console.log("FormNav: componentDidUpdate: props");
-        console.log(props);
     }, [props])
 
     const handleNavigation = e => {
         let name = e.target.getAttribute("name");
         let { currentPage, setCurrentPage, totalFormPages } = props;
-        console.log(currentPage, totalFormPages)
         if (name === "prev" && currentPage > 0) {
             setCurrentPage(currentPage - 1);
         };
