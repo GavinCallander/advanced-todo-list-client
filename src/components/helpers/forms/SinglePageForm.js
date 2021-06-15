@@ -4,6 +4,7 @@ import FormInput from './FormInput';
 
 import * as DATA from '../../../constants/data';
 
+// export default function SinglePageForm forwardRef(props, ref) {
 export default function SinglePageForm(props) {
 
     /*
@@ -18,15 +19,14 @@ export default function SinglePageForm(props) {
 
 // LIFECYCLE EVENTS
     useEffect(() => {
-        console.log("SinglePageForm: componentDidMount");
+        // console.log("SinglePageForm: componentDidMount");
     }, []);
     useEffect(() => {
-        console.log("SinglePageForm: componentDidUpdate: props");
-        console.log(props);
+        // console.log("SinglePageForm: componentDidUpdate: props");
         setDataAndInputs();
     }, [props]);
     useEffect(() => {
-        console.log("SinglePageForm: componentDidUpdate: formData");
+        // console.log("SinglePageForm: componentDidUpdate: formData");
     }, [formData]);
 
 // METHODS
@@ -39,6 +39,7 @@ export default function SinglePageForm(props) {
         let tempObj = DATA[method][modalType];
         let tempArr = [];
         for (let key in DATA[method][modalType]) {
+            console.log(key);
             if (!Array.isArray(DATA[method][modalType][key])) {
                 if (!tempArr.length) {
                     tempArr.push([key]);

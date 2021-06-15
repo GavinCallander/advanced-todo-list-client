@@ -13,27 +13,26 @@ export default function Modal(props) {
         *   if (owner) for fields seems a bit hard-code(ish)? temporary solution, though
 */
 
-//  COMPONENT STATE
+//  STATE
     const [data, setData] = useState({});
     const [options, setOptions] = useState({});
     const [totalFormPages, setTotalFormPages] = useState(0);
 
 //  LIFECYCLE EFFECTS
     useEffect(() => {
-        console.log("Modal: componentDidMount");
+        console.log(DATA);
+        // console.log("Modal: componentDidMount");
     }, []);
     useEffect(() => {
-        console.log("Modal: componentDidUpdate: props");
-        let { method, modalType} = props;
+        // console.log("Modal: componentDidUpdate: props");
+        let { method, modalType, route, setUser} = props;
+        setOptions({ data, route, setUser });
         checkFormType(method, modalType);
     }, [props]);
     useEffect(() => {
-        console.log("Modal: componentDidUpdate: totalFormPages");
+        console.log(data, 'in the totalFormPages effect hook');
+        // console.log("Modal: componentDidUpdate: totalFormPages");
     }, [totalFormPages]);
-    useEffect(() => {
-        console.log("Modal: componentDidUpdate: data");
-        handleFormSubmit();
-    }, [data]);
 
 // METHODS
     const checkFormType = (method, modalType) => {
@@ -58,8 +57,8 @@ export default function Modal(props) {
                 break;
             default:
                 return;
-        }
-    }
+        };
+    };
 
     // conditionally switch modalClassName based on App.js:modalActive(true);
     let modalClassName = props.modalActive ? "modal modal--active" : "modal";

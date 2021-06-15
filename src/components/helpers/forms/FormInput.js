@@ -17,18 +17,14 @@ export default function FormInput(props) {
 
 //  LIFECYCLE EVENTS
     useEffect(() => {
-        console.log("FormInput: componentDidMount");
+        // console.log("FormInput: componentDidMount");
     }, []);
     useEffect(() => {
-        console.log("FormInput: componentDidUpdate: props")
+        // console.log("FormInput: componentDidUpdate: props")
         handleInputLabel(props.name);
     }, [props]);
 
 //  METHODS
-    const handleInputChange = e => {
-        let name = e.target.getAttribute("name");
-        props.setFormData({...props.formData, [name]:e.target.value});
-    };
     const handleInputLabel = name => {
         let tempArr = name.split("");
         let index;

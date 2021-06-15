@@ -44,7 +44,7 @@ export default function App() {
 
 // COMPONENT LIFECYCLE
     useEffect(() => {
-        console.log("App: componentDidMount");
+        // console.log("App: componentDidMount");
         decodeToken();
     }, []);
 
@@ -87,6 +87,8 @@ export default function App() {
                         modalActive={modalActive}
                         modalType={modalType}
                         route={route}
+                        setModalActive={setModalActive}
+                        setUser={setUser}
                         userId={userId}
                     /> :
                     null

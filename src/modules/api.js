@@ -27,6 +27,7 @@ export const getRequest = ({ data, route }) => {
 export const postRequest = ({ data, route, setUser }) => {
     console.log(data);
     console.log(route); 
+    console.log(setUser)
     return;
     axios.post(`${process.env.REACT_APP_SERVER_URL}/${route}`, { data })
     .then(response => {

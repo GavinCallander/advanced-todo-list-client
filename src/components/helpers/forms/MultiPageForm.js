@@ -26,14 +26,14 @@ ToDo:   Order of operations for MultiPageForm:
 
 //  LIFECYCLE EVENTS
     useEffect(() => {
-        console.log("MultiPageForm: componentDidMount");
+        // console.log("MultiPageForm: componentDidMount");
     }, []);
     useEffect(() => {
-        console.log("MultiPageForm: componentDidUpdate: props");
+        // console.log("MultiPageForm: componentDidUpdate: props");
         setDataAndInputs();
     }, [props]);
     useEffect(() => {
-        console.log("MultiPageForm: componentDidUpdate: formData");
+        // console.log("MultiPageForm: componentDidUpdate: formData");
     }, [formData]);
 
 // METHODS
