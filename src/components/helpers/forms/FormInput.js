@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 export default function FormInput(props) {
 
 /*
-    ToDo:   How am I handling data? 
-        *   Pass down the type from whichever form this is being rendered on?
+    ToDo:   Handle type of password being type="text"
+        *   can probably just do by passing down a variable called inputType or something
 
     ToDo:   Consider a better UI than an add button for array inputs?
         *   could space down be add? 
@@ -14,7 +14,6 @@ export default function FormInput(props) {
 
 //  STATE
     const [label, setLabel] = useState("");
-    const [value, setValue] = useState(null);
 
 //  LIFECYCLE EVENTS
     useEffect(() => {
@@ -22,15 +21,15 @@ export default function FormInput(props) {
     }, []);
     useEffect(() => {
         console.log("FormInput: componentDidUpdate: props")
-        handleLabel(props.name);
-        initializeValue();
+        handleInputLabel(props.name);
     }, [props]);
 
 //  METHODS
     const handleInputChange = e => {
-        console.log(e.target.value);
+        let name = e.target.getAttribute("name");
+        props.setFormData({...props.formData, [name]:e.target.value});
     };
-    const handleLabel = name => {
+    const handleInputLabel = name => {
         let tempArr = name.split("");
         let index;
         for (let i = 0; i < tempArr.length; i++) {
@@ -44,14 +43,6 @@ export default function FormInput(props) {
         tempArr[index] = " ";
         setLabel(tempArr.join(""));
     };
-    const initializeValue = () => {
-        if (typeof(props.formData[props.name] != "string")) {
-            setValue([]);
-        }
-        else {
-            setValue("");
-        };
-    };
 
     return (
         <>
@@ -61,9 +52,11 @@ export default function FormInput(props) {
                         <p className="">{label}:</p>
                         <input 
                             className="" 
+                            name={props.name}
                             onChange={e => handleInputChange(e)} 
-                            placeholder={label} type="" 
-                            />
+                            placeholder={label} 
+                            type=""
+                        />
                     </span>:
                     null
             }

@@ -23,11 +23,10 @@ ToDo:   Order of operations for MultiPageForm:
     const [formData, setFormData] = useState({});
     const [inputFieldNames, setInputFieldNames] = useState([]);
 
-//  LIFE CYCLE EVENTS
+//  LIFECYCLE EVENTS
     useEffect(() => {
         console.log("MultiPageForm: componentDidMount");
     }, []);
-    // STORING INPUT FIELDS PASSED IN AS PROPS
     useEffect(() => {
         console.log("MultiPageForm: componentDidUpdate: props");
         setDataAndInputs();

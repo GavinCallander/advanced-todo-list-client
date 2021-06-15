@@ -12,17 +12,29 @@ export default function SinglePageForm(props) {
             *   Ensure componentLifeCycle integrity
     */
 
+// STATE
     const [formData, setFormData] = useState({});
     const [inputFieldNames, setInputFieldNames] = useState([]);
 
+// LIFECYCLE EVENTS
     useEffect(() => {
         console.log("SinglePageForm: componentDidMount");
     }, []);
     useEffect(() => {
         console.log("SinglePageForm: componentDidUpdate: props");
+        // console.log(props);
         setDataAndInputs();
     }, [props]);
+    useEffect(() => {
+        console.log("SinglePageForm: componentDidUpdate: formData");
+        // console.log("formData in singlePageForm: ", formData);
+    }, [formData]);
 
+// METHODS
+    const handleFormSubmit = e => {
+        e.preventDefault();
+        props.setData(formData);
+    };
     const setDataAndInputs = () => {
         let { method, modalType } = props;
         let tempObj = DATA[method][modalType];
@@ -40,23 +52,33 @@ export default function SinglePageForm(props) {
                 tempArr.push(key);
             }
         };
+        tempObj.email = "Testing";
         tempObj.owner = props.userId;
         setFormData(tempObj);
         setInputFieldNames(tempArr);
     };
+    const handleInputChange = e => {
+        let name = e.target.getAttribute("name");
+        setFormData({...formData, [name]: e.target.value});
+    };
 
-    return (
-        <form className="">
-            A single page form
-            {
-                inputFieldNames.length ? 
+// CONTENT
+    let content = inputFieldNames.length ? 
                     inputFieldNames[0].map(name => 
                         <FormInput 
                             formData={formData}
+                            handleInputChange={handleInputChange}
                             key={name} 
-                            name={name} />) :
-                        null
-            }
+                            name={name}
+                            setFormData={setFormData}
+                        />) :
+                        null;
+
+    return (
+        <form className="" onSubmit={e => handleFormSubmit(e)}>
+            A single page form
+            { content }
+            <input className="" type="submit" value="Submit" />
         </form>
     )
 };
