@@ -6,6 +6,13 @@ import * as DATA from '../../../constants/data';
 
 export default function SinglePageForm(props) {
 
+    /*
+        ToDo:   Prevent SinglePageForm mounting before Modal...
+            *   Probably based on content?
+            *   Ensure componentLifeCycle integrity
+    */
+
+    const [formData, setFormData] = useState({});
     const [inputFieldNames, setInputFieldNames] = useState([]);
 
     useEffect(() => {
@@ -13,18 +20,17 @@ export default function SinglePageForm(props) {
     }, []);
     useEffect(() => {
         console.log("SinglePageForm: componentDidUpdate: props");
-        setInputs();
+        setDataAndInputs();
     }, [props]);
 
-    const setInputs = () => {
+    const setDataAndInputs = () => {
         let { method, modalType } = props;
+        let tempObj = DATA[method][modalType];
         let tempArr = [];
         for (let key in DATA[method][modalType]) {
             if (!Array.isArray(DATA[method][modalType][key])) {
                 if (!tempArr.length) {
-                    console.log(tempArr);
                     tempArr.push([key]);
-                    console.log(tempArr);
                 }
                 else {
                     tempArr[0].push(key);
@@ -34,6 +40,8 @@ export default function SinglePageForm(props) {
                 tempArr.push(key);
             }
         };
+        tempObj.owner = props.userId;
+        setFormData(tempObj);
         setInputFieldNames(tempArr);
     };
 
@@ -41,7 +49,13 @@ export default function SinglePageForm(props) {
         <form className="">
             A single page form
             {
-                inputFieldNames.map(name => <FormInput key={name} name={name} />)
+                inputFieldNames.length ? 
+                    inputFieldNames[0].map(name => 
+                        <FormInput 
+                            formData={formData}
+                            key={name} 
+                            name={name} />) :
+                        null
             }
         </form>
     )

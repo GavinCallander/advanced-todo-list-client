@@ -22,8 +22,8 @@ export default function FormInput(props) {
     }, []);
     useEffect(() => {
         console.log("FormInput: componentDidUpdate: props")
-        // handleLabel(props.name);
-        // initializeValue();
+        handleLabel(props.name);
+        initializeValue();
     }, [props]);
 
 //  METHODS
@@ -31,7 +31,6 @@ export default function FormInput(props) {
         console.log(e.target.value);
     };
     const handleLabel = name => {
-        console.log(typeof(name));
         let tempArr = name.split("");
         let index;
         for (let i = 0; i < tempArr.length; i++) {

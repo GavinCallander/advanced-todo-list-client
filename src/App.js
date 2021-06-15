@@ -17,8 +17,6 @@ import * as ROUTES from './constants/routes';
 export default function App() {
 
 /*
-    ToDo:   Handle not having user for loading the modal?
-
     ToDo:   Outline App-held state requirements for each child component
         *   Helpers
             *   AuthWrapper
@@ -40,6 +38,9 @@ export default function App() {
     const [route, setRoute] = useState("");
     const [user, setUser] = useState(null);
     const [userData, setUserData] = useState(null);
+
+// TEMP VARIABLES
+    let userId = user ? user._id : "";
 
 // COMPONENT LIFECYCLE
     useEffect(() => {
@@ -86,7 +87,7 @@ export default function App() {
                         modalActive={modalActive}
                         modalType={modalType}
                         route={route}
-                        userId={user._id}
+                        userId={userId}
                     /> :
                     null
             }

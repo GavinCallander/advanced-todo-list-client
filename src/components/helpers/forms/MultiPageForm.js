@@ -48,9 +48,7 @@ ToDo:   Order of operations for MultiPageForm:
                 if (!tempArr.length) {
                     // if the array has no length
                         // push the key as an array
-                    console.log(tempArr);
                     tempArr.push([key]);
-                    console.log(tempArr);
                 }
                 else {
                     // if the key isn't owner, push it to the array at index of 0
@@ -77,9 +75,17 @@ ToDo:   Order of operations for MultiPageForm:
 let content = 
     inputFieldNames.length ?
         currentPage === 0 ?
-            inputFieldNames[0].map(name => <FormInput formData={formData} key={name} name={name} />):
-            <FormInput name={inputFieldNames[currentPage]} formData={formData} />:
-            null;
+            inputFieldNames[0].map(name => 
+                <FormInput 
+                    formData={formData} 
+                    key={name} 
+                    name={name} 
+                />):
+                <FormInput 
+                    name={inputFieldNames[currentPage]} 
+                    formData={formData} 
+                />:
+                null;
 
     return (
         <div className="">
