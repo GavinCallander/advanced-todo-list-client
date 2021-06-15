@@ -5,14 +5,14 @@ export default function Header(props) {
 
     let menu = props.user ?
         <span className="header__section">
-            <FontAwesomeIcon icon={faBars} size="1x" />
+            <FontAwesomeIcon className="heading heading--two" icon={faBars} size="1x" />
         </span>:
         null
 
     return (
         <div className="header">
             <span className="header__section">
-                <p className="heading heading--lg">Listed</p>
+                <p className="heading heading--two">Listed</p>
             </span>
             {menu}
         </div>

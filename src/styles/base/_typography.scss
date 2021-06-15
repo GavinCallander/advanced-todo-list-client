@@ -10,7 +10,10 @@
 .heading {
     font-family: 'Patrick Hand', serif;
     font-weight: 1000;
-    &--lg {
+    &--one {
         font-size: 3rem;
+    }
+    &--two {
+        font-size: 2rem;
     }
 };
