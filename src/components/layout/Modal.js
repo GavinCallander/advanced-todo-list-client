@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 
 import { SinglePageForm, MultiPageForm } from '../helpers';
 
+import * as METHODS from '../../modules/api';
+
 import * as DATA from '../../constants/data';
 
 export default function Modal(props) {
@@ -9,12 +11,11 @@ export default function Modal(props) {
 /*
     ToDo:   How should Modal handle fields like owner on the list model?
         *   if (owner) for fields seems a bit hard-code(ish)? temporary solution, though
-        *   
 */
-
 
 //  COMPONENT STATE
     const [data, setData] = useState({});
+    const [options, setOptions] = useState({});
     const [totalFormPages, setTotalFormPages] = useState(0);
 
 //  LIFECYCLE EFFECTS
@@ -30,7 +31,8 @@ export default function Modal(props) {
         console.log("Modal: componentDidUpdate: totalFormPages");
     }, [totalFormPages]);
     useEffect(() => {
-        // console.log(data);
+        console.log("Modal: componentDidUpdate: data");
+        handleFormSubmit();
     }, [data]);
 
 // METHODS
@@ -44,6 +46,20 @@ export default function Modal(props) {
         };
         setTotalFormPages(count);
     };
+    const handleFormSubmit = () => {
+        switch (props.method) {
+            case "POST":
+                console.log("Method: POST")
+                METHODS.postRequest(options);
+                break;
+            case "PUT":
+                METHODS.putRequest(options);
+                console.log("Method: PUT")
+                break;
+            default:
+                return;
+        }
+    }
 
     // conditionally switch modalClassName based on App.js:modalActive(true);
     let modalClassName = props.modalActive ? "modal modal--active" : "modal";

@@ -11,6 +11,7 @@ export default function MultiPageForm(props) {
 
 /* 
 ToDo:   How is data being handled between form pages and inputs?
+        *   this is specifically true when compared to SingPageForm
 
 ToDo:   Order of operations for MultiPageForm:
         *   component mounts
@@ -79,10 +80,12 @@ let content =
                     formData={formData} 
                     key={name} 
                     name={name} 
+                    setFormData={setFormData}
                 />):
                 <FormInput 
                     name={inputFieldNames[currentPage]} 
                     formData={formData} 
+                    setFormData={setFormData}
                 />:
                 null;
 

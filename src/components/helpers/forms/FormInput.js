@@ -53,7 +53,7 @@ export default function FormInput(props) {
                         <input 
                             className="" 
                             name={props.name}
-                            onChange={e => handleInputChange(e)} 
+                            onChange={e => props.handleInputChange(e)} 
                             placeholder={label} 
                             type=""
                         />

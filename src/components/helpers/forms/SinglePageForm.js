@@ -22,12 +22,11 @@ export default function SinglePageForm(props) {
     }, []);
     useEffect(() => {
         console.log("SinglePageForm: componentDidUpdate: props");
-        // console.log(props);
+        console.log(props);
         setDataAndInputs();
     }, [props]);
     useEffect(() => {
         console.log("SinglePageForm: componentDidUpdate: formData");
-        // console.log("formData in singlePageForm: ", formData);
     }, [formData]);
 
 // METHODS
@@ -70,7 +69,6 @@ export default function SinglePageForm(props) {
                             handleInputChange={handleInputChange}
                             key={name} 
                             name={name}
-                            setFormData={setFormData}
                         />) :
                         null;
 
