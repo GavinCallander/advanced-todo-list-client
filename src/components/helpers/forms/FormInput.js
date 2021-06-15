@@ -15,7 +15,7 @@ export default function FormInput(props) {
 //  STATE
     const [label, setLabel] = useState("");
 
-//  LIFECYCLE EVENTS
+//  COMPONENT LIFECYCLE
     useEffect(() => {
         // console.log("FormInput: componentDidMount");
     }, []);

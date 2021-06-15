@@ -13,11 +13,11 @@ export default function SinglePageForm(props) {
             *   Ensure componentLifeCycle integrity
     */
 
-// STATE
+//  STATE
     const [formData, setFormData] = useState({});
     const [inputFieldNames, setInputFieldNames] = useState([]);
 
-// LIFECYCLE EVENTS
+//  COMPONENT LIFECYCLE
     useEffect(() => {
         // console.log("SinglePageForm: componentDidMount");
     }, []);
@@ -29,7 +29,7 @@ export default function SinglePageForm(props) {
         // console.log("SinglePageForm: componentDidUpdate: formData");
     }, [formData]);
 
-// METHODS
+//  METHODS
     const handleFormSubmit = e => {
         e.preventDefault();
         props.setData(formData);
@@ -39,7 +39,6 @@ export default function SinglePageForm(props) {
         let tempObj = DATA[method][modalType];
         let tempArr = [];
         for (let key in DATA[method][modalType]) {
-            console.log(key);
             if (!Array.isArray(DATA[method][modalType][key])) {
                 if (!tempArr.length) {
                     tempArr.push([key]);
@@ -52,8 +51,6 @@ export default function SinglePageForm(props) {
                 tempArr.push(key);
             }
         };
-        tempObj.email = "Testing";
-        tempObj.owner = props.userId;
         setFormData(tempObj);
         setInputFieldNames(tempArr);
     };

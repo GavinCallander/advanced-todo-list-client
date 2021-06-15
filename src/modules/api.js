@@ -25,10 +25,7 @@ export const getRequest = ({ data, route }) => {
 
 // POST ROUTE
 export const postRequest = ({ data, route, setUser }) => {
-    console.log(data);
-    console.log(route); 
-    console.log(setUser)
-    return;
+    console.log("Functioning, but barely");
     axios.post(`${process.env.REACT_APP_SERVER_URL}/${route}`, { data })
     .then(response => {
         if (response.data.token) {

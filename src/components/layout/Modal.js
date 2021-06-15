@@ -15,24 +15,34 @@ export default function Modal(props) {
 
 //  STATE
     const [data, setData] = useState({});
+    const [isMounted, setIsMounted] = useState(false);
     const [options, setOptions] = useState({});
     const [totalFormPages, setTotalFormPages] = useState(0);
 
-//  LIFECYCLE EFFECTS
-    useEffect(() => {
-        console.log(DATA);
-        // console.log("Modal: componentDidMount");
-    }, []);
+//  COMPONENT LIFECYCLE
+    // useEffect(() => {
+    //     // console.log("Modal: componentDidMount");
+    // }, []);
     useEffect(() => {
         // console.log("Modal: componentDidUpdate: props");
-        let { method, modalType, route, setUser} = props;
-        setOptions({ data, route, setUser });
+        let { method, modalType } = props;
         checkFormType(method, modalType);
     }, [props]);
+    // useEffect(() => {
+    //     // console.log("Modal: componentDidUpdate: totalFormPages");
+    // }, [totalFormPages]);
+    // useEffect(() => {
+    //     // console.log("Modal: componentDidUpdate: data");
+    // }, [data]);
     useEffect(() => {
-        console.log(data, 'in the totalFormPages effect hook');
-        // console.log("Modal: componentDidUpdate: totalFormPages");
-    }, [totalFormPages]);
+        console.log("Modal: componentDidUpdate: options");
+        let { route, setUser } = props;
+        options.data === data ?
+            isMounted ?
+                handleFormSubmit():
+                    setIsMounted(true):
+                    setOptions({ data, route, setUser });
+    }, [data, options]);
 
 // METHODS
     const checkFormType = (method, modalType) => {
@@ -57,7 +67,8 @@ export default function Modal(props) {
                 break;
             default:
                 return;
-        };
+        }
+        props.setModalActive(false);
     };
 
     // conditionally switch modalClassName based on App.js:modalActive(true);

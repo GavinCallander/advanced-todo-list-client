@@ -39,9 +39,6 @@ export default function App() {
     const [user, setUser] = useState(null);
     const [userData, setUserData] = useState(null);
 
-// TEMP VARIABLES
-    let userId = user ? user._id : "";
-
 // COMPONENT LIFECYCLE
     useEffect(() => {
         // console.log("App: componentDidMount");
@@ -89,7 +86,7 @@ export default function App() {
                         route={route}
                         setModalActive={setModalActive}
                         setUser={setUser}
-                        userId={userId}
+                        user={user}
                     /> :
                     null
             }
